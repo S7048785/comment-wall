@@ -1,5 +1,5 @@
 // import './assets/main.css'
-
+// import '@/style/commons.less'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
