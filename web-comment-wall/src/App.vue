@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView } from "vue-router";
+import TopBar from "@/components/TopBar.vue";
 </script>
 
 <template>
-  <RouterView />
-  <p class="ab">aa</p>
+  <div>
+    <TopBar />
+    <RouterView />
+  </div>
 </template>
 
-<style lang="less" scoped>
-
-.ab {
-  color: @gray-10;
+<style lang="less">
+.icon {
+  width: 2em;
+  height: 2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>
