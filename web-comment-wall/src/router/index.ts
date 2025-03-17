@@ -7,12 +7,16 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      redirect: "/wall",
+      redirect: "/wall-message",
       component: HomeView,
       children: [
         {
-          path: "/wall",
-          component: () => import("@/components/TopBar.vue"),
+          path: "/wall-message",
+          component: () => import("@/views/WallMessage.vue"),
+        },
+        {
+          path: "/wall-image",
+          component: () => import("@/views/WallImage.vue"),
         },
       ],
     },

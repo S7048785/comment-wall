@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11372639",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e8ab",
+      "unicode_decimal": 59563
+    },
+    {
+      "icon_id": "11372640",
+      "name": "编辑",
+      "font_class": "bianji1",
+      "unicode": "e8ac",
+      "unicode_decimal": 59564
+    },
+    {
+      "icon_id": "11372647",
+      "name": "创作",
+      "font_class": "chuangzuo",
+      "unicode": "e8ad",
+      "unicode_decimal": 59565
+    },
+    {
+      "icon_id": "11372651",
+      "name": "点赞",
+      "font_class": "dianzan",
+      "unicode": "e8ae",
+      "unicode_decimal": 59566
+    },
+    {
+      "icon_id": "11372659",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e8af",
+      "unicode_decimal": 59567
+    },
+    {
+      "icon_id": "11372687",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e8b4",
+      "unicode_decimal": 59572
+    },
+    {
+      "icon_id": "11372756",
+      "name": "爱心",
+      "font_class": "aixin1",
+      "unicode": "e8c3",
+      "unicode_decimal": 59587
+    },
+    {
+      "icon_id": "11372758",
+      "name": "点赞",
+      "font_class": "dianzan1",
+      "unicode": "e8c4",
+      "unicode_decimal": 59588
+    },
+    {
+      "icon_id": "11372768",
+      "name": "评论",
+      "font_class": "pinglun1",
+      "unicode": "e8c5",
+      "unicode_decimal": 59589
+    },
+    {
       "icon_id": "43219186",
       "name": "验证码",
       "font_class": "yanzhengma",

@@ -1,6 +1,7 @@
 // import './assets/main.css'
 // import '@/style/commons.less'
-import "@/assets/font/iconfont";
+import "@/assets/font/iconfont.ts";
+// import "@/assets/font/iconfont.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";

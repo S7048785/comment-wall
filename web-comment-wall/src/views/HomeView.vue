@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterView } from "vue-router";
 import { api1 } from "@/api/test";
 const send = async () => {
   try {
@@ -12,16 +13,19 @@ const send = async () => {
 
 <template>
   <div class="home-view">
-    <!-- <button @click="send">点击发送请求</button> -->
+    <FixedBar />
+    <TopBar />
+    <router-view />
+    <FootBar />
   </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
 button {
   background-color: @primary-color;
 }
 .home-view {
-  height: 1600px;
-  // background-color: black;
+  height: 800px;
+  background-color: #eee;
 }
 </style>
