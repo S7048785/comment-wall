@@ -4,7 +4,12 @@
     <div class="slogan">很多事情值得记录，当然也值得回味</div>
     <div class="label-list">
       <el-radio-group v-model="label" size="large">
-        <el-radio-button v-for="item in labelList" :key="item" :label="item" />
+        <el-radio-button
+          v-for="item in labelList"
+          :key="item"
+          :value="item"
+          :label="item"
+        />
       </el-radio-group>
     </div>
     <div class="card">
@@ -16,17 +21,25 @@
         :bgcolor="cardColorList[index % cardColorList.length]"
       />
     </div>
+    <div class="add" ref="add">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-xinzeng"></use>
+      </svg>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import NodeCard from "@/components/NodeCard.vue";
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import { useCategoryStore } from "@/stores/category";
 import { type Card } from "@/types/interface/card";
 import { Label } from "@/types/enum/label";
+// 标签列表
 const labelList: string[] = useCategoryStore().labelList;
+// 标签：'全部'
 const label = ref(labelList[0]);
+// 卡片列表
 const cardList = reactive<Card[]>([
   {
     id: "26146514651",
@@ -154,16 +167,33 @@ const cardList = reactive<Card[]>([
     category: Label.MESSAGE,
   },
 ]);
+// 卡片背景颜色列表
 const cardColorList = reactive<string[]>([
   "#fcafa24d",
   "#93ff0579",
-  "#fa6f56",
+  "#bfefff",
   "#88c1f4c1",
   "##f7a4d3e1",
   "#ffef85",
   "#adffde89",
-  "#f68a26",
+  "#f2dffad0",
 ]);
+const add = ref<HTMLDivElement>();
+
+// 监听滚动条，动态调整add的位置
+function noteHeight() {
+  // 200为底部栏高度
+  if (scrollY + innerHeight + 200 >= document.body.scrollHeight) {
+    (add.value as HTMLDivElement).style.bottom =
+      scrollY + innerHeight + 200 - document.body.scrollHeight + 30 + "px";
+  }
+}
+onMounted(() => {
+  window.addEventListener("scroll", noteHeight);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", noteHeight);
+});
 </script>
 
 <style lang="less" scoped>
@@ -194,18 +224,24 @@ const cardColorList = reactive<string[]>([
       :deep(.el-radio-button__inner) {
         width: 70px;
         box-sizing: border-box;
-        transition: none;
+        // transition: none;
         border: 1px solid transparent;
         background: none;
         color: @gray-1;
+        // border-radius: 25px;
+        &:hover {
+          border-color: #ccc;
+          border-radius: 25px;
+          color: #000;
+        }
       }
       &.is-active {
         :deep(.el-radio-button__inner) {
           color: @gray-0;
           font-weight: 600;
           box-shadow: none;
+          border: 1px solid;
           border-radius: 25px;
-          border: 2px solid #000;
         }
       }
     }
@@ -214,11 +250,28 @@ const cardColorList = reactive<string[]>([
     width: 90%;
     flex-wrap: wrap;
     margin: auto;
+    margin-block: 20px;
     display: flex;
     justify-content: center;
     align-items: baseline;
     .card-item {
       margin: 10px;
+    }
+  }
+  .add {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    color: #ccc;
+    border-radius: 50%;
+    outline: 5px solid;
+    font-size: 2em;
+    height: 42px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    &:hover {
+      background-color: #000;
+      transform: rotate(180deg);
     }
   }
 }

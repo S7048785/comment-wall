@@ -67,8 +67,8 @@ function commentActive() {
 }
 
 onMounted(() => {
-  console.log("mounted");
-  console.log(card);
+  // console.log("mounted");
+  // console.log(card);
 });
 </script>
 
@@ -84,8 +84,12 @@ onMounted(() => {
   justify-content: space-between;
   min-height: 200px;
   padding: 20px;
-  padding-bottom: 10px;
   background-color: @card-color-2;
+  transition: all 0.3s ease;
+  &:hover {
+    // transform: translateY(-5px);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  }
   .top {
     display: flex;
     justify-content: space-between;
@@ -97,7 +101,6 @@ onMounted(() => {
   .body {
     display: flex;
     // height: 100%;
-    padding-top: 10px;
     text-indent: 1em;
     font-size: 16px;
     letter-spacing: 2px;
