@@ -25,7 +25,7 @@ button {
   background-color: @primary-color;
 }
 .home-view {
-  height: 800px;
+  // height: 800px;
   background-color: #eee;
 }
 </style>
