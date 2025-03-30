@@ -60,7 +60,6 @@ const send = () =>
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-
   .logo {
     display: flex;
     align-items: center;

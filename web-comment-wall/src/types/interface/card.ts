@@ -9,3 +9,6 @@ export type Card = {
   likeCount: number;
   commentCount: number;
 };
+
+// 卡片详情
+export type cardInfo = {};

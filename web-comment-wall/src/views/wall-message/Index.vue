@@ -5,7 +5,7 @@
     <div class="label-list">
       <el-radio-group v-model="label" size="large">
         <el-radio-button
-          v-for="item in labelList"
+          v-for="item in cardLabelList"
           :key="item"
           :value="item"
           :label="item"
@@ -18,27 +18,37 @@
         v-for="(item, index) in cardList"
         :key="item.id"
         :card="item"
+        :isActive="isModalOpen && currentCardId === item.id"
         :bgcolor="cardColorList[index % cardColorList.length]"
+        @click.stop="modalToggle(item)"
       />
     </div>
-    <div class="add" ref="add">
+    <div
+      class="add"
+      ref="add"
+      v-show="!isModalOpen"
+      @click.stop="modalToggle({} as Card)"
+    >
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-xinzeng"></use>
       </svg>
     </div>
+    <transition name="modal-fade">
+      <CommentModal v-show="isModalOpen" />
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import NodeCard from "@/components/NodeCard.vue";
-import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
-import { useCategoryStore } from "@/stores/category";
+import NodeCard from "@/components/NoteCard.vue";
+import CommentModal from "@/components/CommentModal.vue";
+import { ref, reactive, onMounted, onUnmounted, toRef } from "vue";
 import { type Card } from "@/types/interface/card";
 import { Label } from "@/types/enum/label";
-// 标签列表
-const labelList: string[] = useCategoryStore().labelList;
+import emitter from "@/utils/emitter";
+import { cardLabelList, cardColorList } from "@/utils/data";
 // 标签：'全部'
-const label = ref(labelList[0]);
+const label = ref(cardLabelList[0]);
 // 卡片列表
 const cardList = reactive<Card[]>([
   {
@@ -167,17 +177,9 @@ const cardList = reactive<Card[]>([
     category: Label.MESSAGE,
   },
 ]);
-// 卡片背景颜色列表
-const cardColorList = reactive<string[]>([
-  "#fcafa24d",
-  "#93ff0579",
-  "#bfefff",
-  "#88c1f4c1",
-  "##f7a4d3e1",
-  "#ffef85",
-  "#adffde89",
-  "#f2dffad0",
-]);
+// 标记当前卡片的id
+let currentCardId: string = "";
+
 const add = ref<HTMLDivElement>();
 
 // 监听滚动条，动态调整add的位置
@@ -185,14 +187,37 @@ function noteHeight() {
   // 200为底部栏高度
   if (scrollY + innerHeight + 200 >= document.body.scrollHeight) {
     (add.value as HTMLDivElement).style.bottom =
-      scrollY + innerHeight + 200 - document.body.scrollHeight + 30 + "px";
+      scrollY + innerHeight + 200 - document.body.scrollHeight + 50 + "px";
+  } else {
+    (add.value as HTMLDivElement).style.bottom = "50px";
   }
+}
+// 弹窗显示状态
+const isModalOpen = ref(false);
+
+/**
+ * 切换弹窗状态
+ * @param card 卡片数据，若为null，表示关闭弹窗
+ */
+function modalToggle(card?: Card) {
+  // 为null时表示点击了卡片以外的区域，所以关闭弹窗
+  if (card == null || card.id == currentCardId) {
+    isModalOpen.value = false;
+    currentCardId = "";
+    return;
+  }
+  // 打开当前卡片弹窗
+  isModalOpen.value = true;
+  currentCardId = card.id;
 }
 onMounted(() => {
   window.addEventListener("scroll", noteHeight);
+  // 绑定弹窗切换事件
+  emitter.on("modal-toggle", modalToggle);
 });
-onBeforeUnmount(() => {
+onUnmounted(() => {
   window.removeEventListener("scroll", noteHeight);
+  emitter.off("modal-toggle");
 });
 </script>
 
@@ -272,6 +297,24 @@ onBeforeUnmount(() => {
     &:hover {
       background-color: #000;
       transform: rotate(180deg);
+    }
+  }
+  .modal-fade-enter-active {
+    /*from*/
+    animation: ani 0.3s;
+  }
+  .modal-fade-leave-active {
+    /*to*/
+    animation: ani 0.3s reverse;
+  }
+
+  /*动画样式*/
+  @keyframes ani {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
 }

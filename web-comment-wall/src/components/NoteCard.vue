@@ -1,5 +1,9 @@
 <template>
-  <div class="node-card" :style="{ width: `${width}px`, background: bgcolor }">
+  <div
+    class="node-card"
+    :class="{ 'is-active': isActive }"
+    :style="{ width: `${width}px`, background: bgcolor }"
+  >
     <div class="top">
       <span class="date">{{ dateStr }}</span>
       <span class="label">{{ card.category }}</span>
@@ -9,7 +13,7 @@
     </div>
     <div class="foot">
       <div class="foot-left">
-        <div class="like" @click="likeActive">
+        <div class="like" @click.stop="likeActive">
           <span class="like-icon">
             <svg
               class="icon"
@@ -42,10 +46,15 @@ import { ref, reactive, withDefaults, onMounted, computed, watch } from "vue";
 import { type Card } from "@/types/interface/card";
 import { Label } from "@/types/enum/label";
 
-const { width = 288, card } = defineProps<{
+const {
+  width = 288,
+  card,
+  isActive = false,
+} = defineProps<{
   width?: number;
-  bgcolor?: string;
+  bgcolor: string;
   card: Card;
+  isActive?: boolean;
 }>();
 
 const dateStr = computed(() => {
@@ -90,6 +99,7 @@ onMounted(() => {
     // transform: translateY(-5px);
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
   }
+
   .top {
     display: flex;
     justify-content: space-between;
@@ -146,5 +156,8 @@ onMounted(() => {
       }
     }
   }
+}
+.is-active {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
 }
 </style>

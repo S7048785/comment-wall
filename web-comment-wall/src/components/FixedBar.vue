@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-bar" :class="{ show: y > 78 }">
+  <div class="fixed-bar">
     <TopBar />
   </div>
 </template>
@@ -13,7 +13,7 @@ const { y } = useScroll(window);
 
 <style lang="less" scoped>
 .fixed-bar {
-  display: none;
+  // display: none;
   width: 100%;
   position: fixed;
   top: 0;
