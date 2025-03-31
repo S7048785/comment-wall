@@ -2,7 +2,7 @@
   <div class="new-card">
     <div class="colors">
       <div class="color-li">
-        <el-radio-group v-model="currentColor" size="large">
+        <el-radio-group v-model="currentOption.color" size="large">
           <el-radio-button
             v-for="(color, index) in cardColorList"
             :key="color"
@@ -12,17 +12,11 @@
           />
         </el-radio-group>
       </div>
-      <!-- <p
-        class="color-li"
-        v-for="(color, index) in cardColorList"
-        :key="index"
-        :style="{ backgroundColor: color }"
-      ></p> -->
     </div>
-    <div class="card-main">
+    <div class="card-main" :style="{ backgroundColor: currentOption.color }">
       <el-input
         type="textarea"
-        v-model="message"
+        v-model="currentOption.message"
         placeholder="留言..."
         class="message"
         resize="none"
@@ -31,19 +25,27 @@
         maxlength="120"
         input-style="height: 100%"
       />
-      <el-input placeholder="签名" class="name" v-model="name" maxlength="10" />
+      <el-input
+        placeholder="签名"
+        class="name"
+        v-model="currentOption.name"
+        maxlength="10"
+      />
     </div>
+    <div class="labels"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRef } from "vue";
+import { ref, reactive, toRef, computed } from "vue";
 import { cardColorList, cardLabelList } from "@/utils/data";
-const currentColor = ref(cardColorList[0]);
 
-const message = ref("");
-const name = ref("");
-const label = ref(cardLabelList[0]);
+const currentOption = reactive({
+  name: "",
+  message: "",
+  color: cardColorList[0],
+  label: cardLabelList[1],
+});
 </script>
 
 <style lang="less" scoped>
@@ -54,28 +56,27 @@ const label = ref(cardLabelList[0]);
       display: flex;
       justify-content: center;
       margin-block: 10px;
+
       .el-radio-button {
         margin: 2px;
+        border-radius: 10px;
 
+        &.is-active {
+          :deep(.el-radio-button__inner) {
+            color: none;
+            font-weight: 600;
+            box-shadow: none;
+            border: 1px solid black;
+          }
+        }
         :deep(.el-radio-button__inner) {
           width: 100%;
           background: none;
           height: 24px;
-          border: 1px solid transparent;
-          // box-shadow: 0 0 0 0px #fff inset;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          box-shadow: none;
         }
-        :deep(.el-radio-button__inner, .el-radio-button:first-child) {
-          border-radius: 0px;
-        }
-        // &.is-active {
-        //   :deep(.el-radio-button__inner) {
-        //     color: none;
-        //     font-weight: 600;
-        //     box-shadow: none;
-        //     border: 1px solid #ccc;
-        //     // border-radius: 5px;
-        //   }
-        // }
       }
     }
     .color-selected {
