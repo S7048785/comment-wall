@@ -1,12 +1,17 @@
 <template>
   <div class="comment-modal" v-show="isModalOpen" @click.stop="">
     <div class="modal-head">
-      <p class="modal-name">
+      <div class="modal-name">
         写{{ currentOption.id === "" ? "留言" : "评论" }}
-      </p>
-      <svg class="icon" aria-hidden="true" @click="close">
+      </div>
+      <div class="modal-btn" v-show="currentOption.id === ''">
+        <el-button round>丢弃</el-button>
+        <el-button round>发布</el-button>
+      </div>
+
+      <!-- <svg class="icon" aria-hidden="true" @click="close">
         <use xlink:href="#icon-guanbi"></use>
-      </svg>
+      </svg> -->
     </div>
     <!-- <NewCard /> -->
     <div class="new-card">
@@ -133,10 +138,19 @@ function close() {
       font-size: 16px;
       color: @gray-1;
       font-weight: 600;
+      line-height: 32px;
     }
     svg {
       color: green;
       cursor: pointer;
+    }
+    .modal-btn {
+      :deep(.el-button:hover) {
+        background-color: #eee;
+        border-color: #ddd;
+        color: black;
+        outline: none;
+      }
     }
   }
   .new-card {
@@ -209,7 +223,7 @@ function close() {
     .label-li {
       margin-block: 10px;
       .el-radio-group {
-        justify-content: center;
+        justify-content: space-between;
       }
     }
   }
