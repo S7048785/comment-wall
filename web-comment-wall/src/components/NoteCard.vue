@@ -2,14 +2,14 @@
   <div
     class="node-card"
     :class="{ 'is-active': isActive }"
-    :style="{ width: `${width}px`, background: bgcolor }"
+    :style="{ width: `${width}px`, background: card.color }"
   >
     <div class="top">
       <span class="date">{{ dateStr }}</span>
-      <span class="label">{{ card.category }}</span>
+      <span class="label">{{ card.label }}</span>
     </div>
     <div class="body">
-      {{ card.content }}
+      {{ card.message }}
     </div>
     <div class="foot">
       <div class="foot-left">
@@ -52,7 +52,6 @@ const {
   isActive = false,
 } = defineProps<{
   width?: number;
-  bgcolor: string;
   card: Card;
   isActive?: boolean;
 }>();

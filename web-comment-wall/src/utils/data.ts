@@ -1,17 +1,18 @@
+import { Label } from "@/types/enum/label";
 // 卡片标签列表
-export const cardLabelList = [
-  "全部",
-  "留言",
-  "目标",
-  "理想",
-  "过去",
-  "未来",
-  "爱情",
-  "亲情",
-  "友情",
-  "秘密",
-  "心跳",
-  "其他",
+export const cardLabelList: Label[] = [
+  Label.ALL,
+  Label.MESSAGE,
+  Label.TARGET,
+  Label.IDEAL,
+  Label.PAST,
+  Label.FUTURE,
+  Label.LOVE,
+  Label.LOVELETTER,
+  Label.FRIEND,
+  Label.SECRET,
+  Label.HEARTBEAT,
+  Label.OTHER,
 ];
 // 卡片颜色列表
 export const cardColorList = [

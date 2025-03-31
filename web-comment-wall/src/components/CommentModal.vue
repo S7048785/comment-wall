@@ -1,7 +1,9 @@
 <template>
   <div class="comment-modal" v-show="isModalOpen" @click.stop="">
     <div class="modal-head">
-      <p class="modal-name">写评论</p>
+      <p class="modal-name">
+        写{{ currentOption.id === "" ? "留言" : "评论" }}
+      </p>
       <svg class="icon" aria-hidden="true" @click="close">
         <use xlink:href="#icon-guanbi"></use>
       </svg>
@@ -16,6 +18,8 @@
               :key="color"
               :style="{ backgroundColor: color }"
               :value="color"
+              :disabled="currentOption.id !== ''"
+              :class="{ disabled: currentOption.id !== '' }"
               size="small"
             />
           </el-radio-group>
@@ -30,13 +34,15 @@
           resize="none"
           show-word-limit
           :rows="8"
-          maxlength="120"
+          maxlength="75"
+          :readonly="currentOption.id !== ''"
           input-style="height: 100%"
         />
         <el-input
           placeholder="签名"
           class="name"
-          v-model="currentOption.name"
+          :readonly="currentOption.id !== ''"
+          v-model="currentOption.username"
           maxlength="10"
         />
       </div>
@@ -48,12 +54,17 @@
     </div>
     <div class="labels">
       <div class="label-li">
-        <el-radio-group v-model="currentOption.label" size="large">
+        <el-radio-group
+          v-model="currentOption.label"
+          :disabled="currentOption.id !== ''"
+          size="large"
+        >
           <el-radio-button
-            v-for="(label, index) in cardLabelList"
+            v-for="(label, index) in cardLabelList.slice(1)"
             :key="label"
             :value="label"
             :label="label"
+            :disabled="currentOption.id !== ''"
           ></el-radio-button>
         </el-radio-group>
       </div>
@@ -62,17 +73,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, watch } from "vue";
 import emitter from "@/utils/emitter";
+import { type Card } from "@/types/interface/card";
+import { Label } from "@/types/enum/label";
 import { cardColorList, cardLabelList } from "@/utils/data";
+import { useCardStore } from "@/stores/card";
+// const labelList = cardLabelList.splice(1);
+const cardStore = useCardStore();
+const props = defineProps<{
+  card: Card;
+}>();
+const currentOption = ref({ ...props.card });
 
-const currentOption = reactive({
-  name: "",
-  message: "",
-  color: cardColorList[0],
-  label: cardLabelList[1],
-});
 const isModalOpen = ref(true);
+
+watch(
+  () => props.card,
+  (newVal) => {
+    currentOption.value = { ...newVal };
+    // console.log(newVal);
+  }
+);
+
+watch(
+  () => currentOption.value,
+  (newVal) => {
+    if (newVal.id === "") {
+      cardStore.setCurrentCard({ ...newVal });
+    }
+  },
+  {
+    deep: true,
+  }
+);
+
 // 关闭弹窗
 function close() {
   emitter.emit("modal-toggle");
@@ -81,7 +116,7 @@ function close() {
 
 <style lang="less" scoped>
 .comment-modal {
-  width: 360px;
+  width: 400px;
   height: 100%;
   position: fixed;
   right: 0px;
@@ -147,10 +182,12 @@ function close() {
       padding: 12px;
       box-sizing: border-box;
       .message {
-        flex: 6;
+        font-size: 18px;
+        height: 80%
+        // flex: 1;
       }
       .name {
-        // flex: 1;
+
       }
       :deep(.el-textarea__inner) {
         box-shadow: none;
@@ -161,11 +198,16 @@ function close() {
         // box-shadow: none;
         box-shadow: 0 0 0 1px #fff inset;
       }
+      :deep(.el-input__inner) {
+        padding-right: 10px;
+        text-align: right;
+        font-size: 16px;
+      }
     }
   }
   .labels {
     .label-li {
-      // margin-block: 10px;
+      margin-block: 10px;
       .el-radio-group {
         justify-content: center;
       }
@@ -181,13 +223,13 @@ function close() {
         font-weight: 600;
         color: black;
         box-shadow: none;
-        background: none;
+        background: #ccc;
+        border-radius: 15px;
       }
     }
     :deep(.el-radio-button__inner) {
       width: 100%;
       background: none;
-      height: 24px;
       border: none;
       &:hover {
         color: black;

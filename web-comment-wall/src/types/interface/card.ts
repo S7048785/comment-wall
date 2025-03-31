@@ -2,8 +2,9 @@ import { Label } from "@/types/enum/label";
 export type Card = {
   id: string;
   date: Date;
-  category: Label;
-  content: string;
+  color?: string;
+  label: Label;
+  message: string;
   username: string;
   liked: boolean;
   likeCount: number;
