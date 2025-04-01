@@ -1,6 +1,5 @@
 export enum Label {
   ALL = "全部",
-  MESSAGE = "留言",
   TARGET = "目标",
   IDEAL = "理想",
   PAST = "过去",
@@ -9,6 +8,6 @@ export enum Label {
   LOVELETTER = "亲情",
   FRIEND = "友情",
   SECRET = "秘密",
-  HEARTBEAT = "心跳",
+  ABSTRUCT = "抽象",
   OTHER = "其他",
 }

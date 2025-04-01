@@ -5,7 +5,7 @@
     :style="{ width: `${width}px`, background: card.color }"
   >
     <div class="top">
-      <span class="date">{{ dateStr }}</span>
+      <span class="date">{{ card.date }}</span>
       <span class="label">{{ card.label }}</span>
     </div>
     <div class="body">
@@ -13,7 +13,7 @@
     </div>
     <div class="foot">
       <div class="foot-left">
-        <div class="like" @click.stop="likeActive">
+        <div class="like" @click="likeActive" @mousedown.stop>
           <span class="like-icon">
             <svg
               class="icon"
@@ -42,9 +42,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, withDefaults, onMounted, computed, watch } from "vue";
+import { onMounted } from "vue";
 import { type Card } from "@/types/interface/card";
-import { Label } from "@/types/enum/label";
+import emitter from "@/utils/emitter";
 
 const {
   width = 288,
@@ -56,14 +56,15 @@ const {
   isActive?: boolean;
 }>();
 
-const dateStr = computed(() => {
-  return `${card.date.getFullYear()}.${("0" + (card.date.getMonth() + 1)).slice(
-    -2
-  )}.${("0" + card.date.getDate()).slice(-2)}`;
-});
+// const dateStr = computed(() => {
+//   return `${card.date.getFullYear()}.${("0" + (card.date.getMonth() + 1)).slice(
+//     -2
+//   )}.${("0" + card.date.getDate()).slice(-2)}`;
+// });
 
 // 点赞功能
-function likeActive() {
+function likeActive(event: MouseEvent) {
+  event.stopPropagation();
   console.log("like");
   card.liked = !card.liked;
   // 发送点赞请求接口
@@ -72,6 +73,8 @@ function likeActive() {
 // 评论功能
 function commentActive() {
   console.log("comment");
+  // 触发聚焦
+  emitter.emit("commentFocus");
 }
 
 onMounted(() => {

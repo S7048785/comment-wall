@@ -1,7 +1,7 @@
 import { Label } from "@/types/enum/label";
 export type Card = {
   id: string;
-  date: Date;
+  date: string;
   color?: string;
   label: Label;
   message: string;

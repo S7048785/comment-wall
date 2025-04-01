@@ -8,16 +8,18 @@ export const clickOutside = {
           if (!el.contains(event.target)) {
             // 如果是外部点击，则执行绑定的函数
             // console.log(event.target);
+            // event.stopPropagation();
             binding.value();
+            
           }
         };
         // 在全局添加点击事件监听
-        document.addEventListener("click", el.EventLis);
+        document.addEventListener("mousedown", el.EventLis);
       },
       unmounted(el: any, binding: any) {
         // 在全局移除点击事件监听
 
-        document.removeEventListener("click", el.EventLis);
+        document.removeEventListener("mousedown", el.EventLis);
       },
     });
   },

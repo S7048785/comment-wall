@@ -8,7 +8,7 @@ export const useCardStore = defineStore("card", () => {
 
   const currentCard = ref<Card>({
     id: "",
-    date: new Date(),
+    date: "2025.04.01",
     username: "",
     message: "",
     liked: false,

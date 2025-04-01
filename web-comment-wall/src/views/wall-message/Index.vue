@@ -19,14 +19,14 @@
         :key="item.id"
         :card="item"
         :isActive="isModalOpen && targetCard.id === item.id"
-        @click.stop="modalToggle(item)"
+        @mousedown.stop="modalToggle(item)"
       />
     </div>
     <div
       class="add"
       ref="add"
       v-show="!isModalOpen"
-      @click.stop="modalToggle({} as Card)"
+      @click="modalToggle({} as Card)"
     >
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-xinzeng"></use>
@@ -39,16 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import NodeCard from "@/components/NoteCard.vue";
-import CommentModal from "@/components/CommentModal.vue";
+import NodeCard from "@/views/wall-message/components/NoteCard.vue";
+import CommentModal from "@/views/wall-message/components/CommentModal.vue";
 import {
   ref,
   reactive,
-  toRef,
   onMounted,
   onUnmounted,
-  shallowRef,
-  shallowReactive,
 } from "vue";
 import { type Card } from "@/types/interface/card";
 import { Label } from "@/types/enum/label";
@@ -61,7 +58,7 @@ let targetCard = ref<Card>({ ...useCardStore().currentCard });
 const cardList = reactive<Card[]>([
   {
     id: "26146514651",
-    date: new Date(),
+    date: "2025.04.01",
     message: "路上总有阴影，但你抬头就能看到光。",
     username: "用户名1",
     liked: true,
@@ -72,7 +69,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514652",
-    date: new Date(),
+    date: "2025.04.01",
     message: "你如果不想被坑，就不要先进坑。",
     username: "用户名2",
     liked: false,
@@ -83,7 +80,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514653",
-    date: new Date(),
+    date: "2025.04.01",
     message:
       "我曾听人说过，当你不能够再拥有，你唯一可以做的，就是令自己不要忘记。 -- 《东邪西毒》",
     username: "用户名3",
@@ -95,7 +92,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514654",
-    date: new Date(),
+    date: "2025.04.01",
     message: "我在最好的时候碰到你，是我的运气。",
     username: "用户名4",
     liked: false,
@@ -106,7 +103,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514655",
-    date: new Date(),
+    date: "2025.04.01",
     message:
       "当你年轻时，以为什么都有答案，不过老了的时候，你可能又觉得其实人生并没有所谓的答案。 -- 《堕落天使》",
     username: "用户名5",
@@ -118,7 +115,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514656",
-    date: new Date(),
+    date: "2025.04.01",
     message:
       "最先感知到三十将至的也许不是我们的身体，也不是精神，而是物质。 -- 《三十而已》",
     username: "用户名6",
@@ -130,7 +127,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514657",
-    date: new Date(),
+    date: "2025.04.01",
     message:
       "可能在一生中，很难找到个你肯爱他的人。如果找到的话，无论情况是怎样，都应该去尝试，我害怕将来后悔。 -- 《志明与春娇》",
     username: "用户名7",
@@ -142,7 +139,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514658",
-    date: new Date(),
+    date: "2025.04.01",
     message: "人要么好看，要么丑，夹在中间的只能说可爱。  -- 《年轻气盛》",
     username: "用户名8",
     liked: false,
@@ -153,18 +150,18 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514659",
-    date: new Date(),
+    date: "2025.04.01",
     message: "情不知所起，一往而深。 -- 《游园惊梦》",
     username: "用户名9",
     liked: true,
     likeCount: 6,
     color: cardColorList[0],
     commentCount: 3,
-    label: Label.HEARTBEAT,
+    label: Label.ABSTRUCT,
   },
   {
     id: "26146514660",
-    date: new Date(),
+    date: "2025.04.01",
     message: "生活就是不断前行。",
     username: "用户名10",
     liked: false,
@@ -175,7 +172,7 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514661",
-    date: new Date(),
+    date: "2025.04.01",
     message:
       "决定我们成为什么样的人的，不是我们的能力，而是我们的选择。 -- 《哈利·波特与密室》",
     username: "用户名11",
@@ -187,14 +184,14 @@ const cardList = reactive<Card[]>([
   },
   {
     id: "26146514662",
-    date: new Date(),
+    date: "2025.04.01",
     message: "痛苦和恐惧不是死亡，还有挽回的余地。 -- 《教父》",
     username: "用户名12",
     liked: false,
     likeCount: 3,
     color: cardColorList[3],
     commentCount: 2,
-    label: Label.MESSAGE,
+    label: Label.FRIEND,
   },
 ]);
 
@@ -269,7 +266,9 @@ onUnmounted(() => {
     display: flex;
     justify-content: center;
     margin-top: 48px;
-
+    .el-radio-group {
+      justify-content: center;
+    }
     .el-radio-button {
       padding: 0 5px;
 
