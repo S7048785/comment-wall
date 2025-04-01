@@ -13,7 +13,7 @@ import emitter from "@/utils/emitter";
 </script>
 
 <template>
-  <div class="home-view" @click="emitter.emit('modal-toggle')">
+  <div class="home-view">
     <FixedBar />
     <!-- <TopBar /> -->
     <router-view />

@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-modal" v-show="isModalOpen" @click.stop="">
+  <div class="comment-modal" v-show="isModalOpen" v-click-outside="close">
     <div class="modal-head">
       <div class="modal-name">
         写{{ currentOption.id === "" ? "留言" : "评论" }}
@@ -53,9 +53,7 @@
       </div>
     </div>
     <div class="modal-head">
-      <div class="modal-head">
-        <p class="modal-name">选择标签</p>
-      </div>
+      <p class="modal-name">选择标签</p>
     </div>
     <div class="labels">
       <div class="label-li">
@@ -74,6 +72,21 @@
         </el-radio-group>
       </div>
     </div>
+    <div class="comment">
+      <div class="modal-head">
+        <p class="modal-name">评论</p>
+      </div>
+      <div
+        class="comment-area"
+        v-click-outside="() => (commentFootShow = false)"
+      >
+        <div class="body">
+          <el-input @focus="commentFootShow = true" />
+        </div>
+        <div class="footer" v-show="commentFootShow">wwww</div>
+      </div>
+    </div>
+    <div class="contents">awww</div>
   </div>
 </template>
 
@@ -113,6 +126,8 @@ watch(
   }
 );
 
+const commentFootShow = ref(false);
+
 // 关闭弹窗
 function close() {
   emitter.emit("modal-toggle");
@@ -135,7 +150,7 @@ function close() {
     display: flex;
     justify-content: space-between;
     .modal-name {
-      font-size: 16px;
+      font-size: 18px;
       color: @gray-1;
       font-weight: 600;
       line-height: 32px;
