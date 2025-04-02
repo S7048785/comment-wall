@@ -1,4 +1,4 @@
-import { Label } from "@/types/enum/label";
+import { Label, imgLabel } from "@/types/enum/label";
 export type Card = {
   id: string;
   date: string;
@@ -9,6 +9,13 @@ export type Card = {
   liked: boolean;
   likeCount: number;
   commentCount: number;
+};
+
+export type imgCard = {
+  id: string;
+  label: imgLabel;
+  src: string;
+  likeCount: number;
 };
 
 // 卡片详情

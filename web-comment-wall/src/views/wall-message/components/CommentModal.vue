@@ -1,10 +1,14 @@
 <template>
-  <div class="comment-modal" v-show="isModalOpen" v-click-outside="close" ref="index">
+  <div
+    class="comment-modal"
+    v-show="isModalOpen"
+    v-click-outside="close"
+    ref="index"
+  >
     <div class="modal-head">
       <div class="modal-name">
         写{{ currentOption.id === "" ? "留言" : "评论" }}
       </div>
-      
 
       <svg class="icon" aria-hidden="true" @click="close">
         <use xlink:href="#icon-guanbi"></use>
@@ -27,7 +31,11 @@
           </el-radio-group>
         </div>
       </div>
-      <div class="card-main" :class="{'is-user': currentOption.id == ''}" :style="{ backgroundColor: currentOption.color }">
+      <div
+        class="card-main"
+        :class="{ 'is-user': currentOption.id === '' }"
+        :style="{ backgroundColor: currentOption.color }"
+      >
         <div class="card-top">
           <div class="card-date">{{ currentOption.date }}</div>
           <div class="card-label">{{ currentOption.label }}</div>
@@ -47,18 +55,20 @@
         <el-input
           placeholder="签名"
           class="name"
+          :class="{ 'is-focus': nameInput }"
+          @focus="nameInput = true"
+          @blur="nameInput = false"
           :readonly="currentOption.id !== ''"
           v-model="currentOption.username"
           maxlength="10"
-          
         />
       </div>
     </div>
-  
+
     <div class="labels" v-show="currentOption.id === ''">
       <div class="modal-head">
-      <p class="modal-name">选择标签</p>
-    </div>
+        <p class="modal-name">选择标签</p>
+      </div>
       <div class="label-li">
         <el-radio-group
           v-model="currentOption.label"
@@ -77,14 +87,20 @@
     </div>
     <div class="comment" v-show="currentOption.id !== ''">
       <div class="modal-head">
-        <p class="modal-name">评论<span> {{ 123 }}</span></p>
+        <p class="modal-name">
+          评论<span> {{ 123 }}</span>
+        </p>
       </div>
       <div
         class="comment-area"
         v-click-outside="() => (commentFootShow = false)"
       >
         <div class="body">
-          <el-input @focus="commentFootShow = true" v-model="commentMsg" ref="commentInput"/>
+          <el-input
+            @focus="commentFootShow = true"
+            v-model="commentMsg"
+            ref="commentInput"
+          />
         </div>
         <div class="footer" v-show="commentFootShow">
           <el-button round @click="comment">发送</el-button>
@@ -92,12 +108,12 @@
       </div>
     </div>
     <div class="contents" v-show="currentOption.id !== ''">
-      <CommentContent/>
+      <CommentContent />
     </div>
-      <div class="comment-btn" v-show="currentOption.id === ''">
-        <el-button class="discard" round @click="discard">丢弃</el-button>
-        <el-button class="publish" round @click="publish">发布</el-button>
-      </div>
+    <div class="comment-btn" v-show="currentOption.id === ''">
+      <el-button class="discard" round @click="discard">丢弃</el-button>
+      <el-button class="publish" round @click="publish">发布</el-button>
+    </div>
   </div>
 </template>
 
@@ -115,8 +131,6 @@ const cardStore = useCardStore();
 const props = defineProps<{
   card: Card;
 }>();
-
-
 
 // 当前卡片数据
 const currentOption = ref({ ...props.card });
@@ -140,30 +154,29 @@ watch(
     // 数据变化时，跳转到顶部
     window.setTimeout(() => {
       index.value.scrollTo({
-      top: 0,
-      behavior: "smooth",
+        top: 0,
+        behavior: "smooth",
+      });
     });
-    })
   },
   {
     deep: true,
   }
 );
-
+// 标记签名输入框 是否聚焦
+const nameInput = ref(false);
 // 是否显示评论区
 const commentFootShow = ref(false);
 // 评论输入框
-const commentInput = ref()
+const commentInput = ref();
 onMounted(() => {
   emitter.on("commentFocus", () => {
-    
     commentInput.value.focus();
-  })
-})
+  });
+});
 onUnmounted(() => {
   emitter.off("commentFocus");
-
-})
+});
 // 关闭弹窗
 function close() {
   emitter.emit("modal-toggle");
@@ -183,10 +196,10 @@ function publish() {
   }
   // 校验留言板是否为当前用户所属
   if (currentOption.value.id !== "") {
-    ElMessage.error("当前留言非您所属 无法发布")
+    ElMessage.error("当前留言非您所属 无法发布");
     return;
   }
-  
+
   // TODO: 发布留言 请求
 }
 
@@ -200,7 +213,7 @@ function comment() {
     ElMessage.error("评论内容不能为空");
     return;
   }
-  
+
   // TODO: 发送评论 请求
 }
 </script>
@@ -208,10 +221,10 @@ function comment() {
 <style lang="less" scoped>
 .comment-modal {
   width: 400px;
-  height: 93%;
+  height: 94%;
   position: fixed;
   right: 0px;
-  top: 7%;
+  top: 6%;
   z-index: 1000;
   background-color: #ffffffcc;
   box-shadow: 0px 0px 20px 0px #00000014;
@@ -233,9 +246,7 @@ function comment() {
       cursor: pointer;
     }
     .modal-btn {
-      
       .publish {
-
       }
     }
   }
@@ -285,12 +296,10 @@ function comment() {
       .card-top {
         display: flex;
         justify-content: space-between;
-        color: #ccc;
+        color: #aaa;
         .card-date {
-
         }
         .card-label {
-
         }
       }
       .message {
@@ -301,23 +310,43 @@ function comment() {
       }
       .name {
         height: 20%;
+        &.is-focus {
+          :deep(.el-input__wrapper) {
+            border: 2px solid #4a9dec;
+            box-shadow: 0px 0px 0px 3px #4a9dec33;
+            background-color: white;
+          }
+        }
       }
       :deep(.el-textarea__inner) {
         box-shadow: none;
         background-color: transparent;
       }
       :deep(.el-input__wrapper) {
-        background-color: transparent;
         box-shadow: none;
+        background-color: transparent;
       }
       &.is-user {
         :deep(.el-input__wrapper) {
-          outline: 1px solid #fff;
+          // outline: 1px solid #fff;
+          border: 2px solid transparent;
+          width: 15em;
+          height: 2.5em;
+          padding-left: 0.8em;
+          outline: none;
+          overflow: hidden;
+          background-color: #f3f3f3;
+          border-radius: 10px;
+          transition: all 0.5s;
+          &:hover {
+            border: 2px solid #4a9dec;
+            box-shadow: 0px 0px 0px 3px #4a9dec33;
+            background-color: white;
+          }
         }
       }
       :deep(.el-input__inner) {
         text-align: right;
-        
         font-size: 16px;
       }
     }
@@ -369,11 +398,11 @@ function comment() {
         margin-top: 10px;
         padding-right: 10px;
         :deep(.el-button:hover) {
-        background-color: #eee;
-        border-color: #ddd;
-        color: black;
-        outline: none;
-      }
+          background-color: #eee;
+          border-color: #ddd;
+          color: black;
+          outline: none;
+        }
       }
     }
   }
@@ -384,7 +413,7 @@ function comment() {
     position: absolute;
     bottom: 25px;
     width: 90%;
-    text-align:center;
+    text-align: center;
     .el-button {
       width: 40%;
       height: 40px;
@@ -403,11 +432,11 @@ function comment() {
       }
     }
     :deep(.el-button:hover) {
-        // background-color: #eee;
-        // border-color: #ddd;
-        // color: black;
-        // outline: none;
-      }
+      // background-color: #eee;
+      // border-color: #ddd;
+      // color: black;
+      // outline: none;
+    }
   }
 }
 </style>
