@@ -14,26 +14,27 @@
     </div>
     <div class="card">
       <!-- 图像卡片-->
-      <ImageCard
-        class="card-item"
-        v-for="(item, index) in imgList"
-        :src="item.src"
-        :key="item.id"
-      />
-      <!-- <NodeCard
-        class="card-item"
-        v-for="(item, index) in cardList"
-        :key="item.id"
-        :card="item"
-        :isActive="isModalOpen && targetCard.id === item.id"
-        @mousedown.stop="modalToggle(item)"
-      /> -->
+      <div class="container">
+        <div
+          class="item"
+          v-for="(item, index) in imageCardListReactivity"
+          :key="item.id"
+        >
+          <img :src="item.url" alt="" />
+          <div class="bg">
+            <div class="liked" @click="toggleLiked(item)">
+              <heart v-model="item.liked" />
+              <span class="count">{{ item.likeCount }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="add" ref="add" v-show="!isModalOpen" @click="">
+    <!-- <div class="add" ref="add" v-show="!isModalOpen" @click="">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-xinzeng"></use>
       </svg>
-    </div>
+    </div> -->
     <!-- <transition name="modal-fade">
       <CommentModal v-show="isModalOpen" :card="targetCard" />
     </transition> -->
@@ -43,24 +44,33 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted } from "vue";
 import emitter from "@/utils/emitter";
-import { imgLabelList, imgList } from "@/utils/data";
-import ImageCard from "./components/ImageCard.vue";
-
+import Heart from "@/components/icons/Heart.vue";
+import { imgLabelList, imageCardList } from "@/utils/data";
+const imageCardListReactivity = reactive(imageCardList);
 const currentLabel = ref(imgLabelList[0]);
-const add = ref<HTMLDivElement>();
+
+// 点击喜欢按钮时触发的事件
+async function toggleLiked(imageCard: any) {
+  imageCard.liked = !imageCard.liked;
+  imageCard.likeCount += imageCard.liked === true ? 1 : -1;
+  // TODO: 发送喜欢事件
+}
+
+// const add = ref<HTMLDivElement>();
 
 // 监听滚动条，动态调整add的位置
-function noteHeight() {
-  // 200为底部栏高度
-  if (scrollY + innerHeight + 200 >= document.body.scrollHeight) {
-    (add.value as HTMLDivElement).style.bottom =
-      scrollY + innerHeight + 200 - document.body.scrollHeight + 50 + "px";
-  } else {
-    (add.value as HTMLDivElement).style.bottom = "50px";
-  }
-}
+// function noteHeight() {
+//   // 200为底部栏高度
+//   if (scrollY + innerHeight + 200 >= document.body.scrollHeight) {
+//     (add.value as HTMLDivElement).style.bottom =
+//       scrollY + innerHeight + 200 - document.body.scrollHeight + 50 + "px";
+//   } else {
+//     (add.value as HTMLDivElement).style.bottom = "50px";
+//   }
+// }
+
 // 弹窗显示状态
-const isModalOpen = ref(false);
+// const isModalOpen = ref(false);
 
 /**
  * 切换弹窗状态
@@ -87,12 +97,12 @@ const isModalOpen = ref(false);
 // }
 // }
 onMounted(() => {
-  window.addEventListener("scroll", noteHeight);
+  // window.addEventListener("scroll", noteHeight);
   // 绑定弹窗切换事件
   // emitter.on("modal-toggle", modalToggle);
 });
 onUnmounted(() => {
-  window.removeEventListener("scroll", noteHeight);
+  // window.removeEventListener("scroll", noteHeight);
   // emitter.off("modal-toggle");
 });
 </script>
@@ -148,15 +158,84 @@ onUnmounted(() => {
     }
   }
   .card {
-    width: 90%;
-    margin: auto;
-    column-count: 4;
-    // column-gap: 10px;
-    // flex-wrap: wrap;
-    // margin: auto;
+    display: flex;
+    justify-content: center;
     margin-block: 20px;
-    .card-item {
-      margin: 10px;
+    // 瀑布流布局
+    .container {
+      width: 80%;
+      column-count: 5;
+      column-gap: 20px;
+      .item {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        width: 260px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        &:hover {
+          .bg {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #5a5a5a17;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        .bg {
+          display: none;
+          .liked {
+            position: absolute;
+            cursor: pointer;
+            right: 15px;
+            bottom: 8px;
+            width: 70px;
+            display: flex;
+            background-color: #cccccc96;
+            border-radius: 15px;
+            justify-content: space-evenly;
+            .count {
+              font-size: 16px;
+              font-weight: 600;
+              user-select: none;
+            }
+          }
+        }
+      }
+    }
+    @media (max-width: 1700px) {
+      .container {
+        column-count: 4;
+      }
+    }
+
+    @media (max-width: 1385px) {
+      .container {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 1045px) {
+      .container {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
   .add {

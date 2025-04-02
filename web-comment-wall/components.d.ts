@@ -16,6 +16,7 @@ declare module 'vue' {
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     FixedBar: typeof import('./src/components/FixedBar.vue')['default']
     FootBar: typeof import('./src/components/FootBar.vue')['default']
+    Heart: typeof import('./src/components/icons/Heart.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
