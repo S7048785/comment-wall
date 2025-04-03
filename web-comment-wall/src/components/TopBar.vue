@@ -1,5 +1,5 @@
 <template>
-  <div class="top-bar">
+  <div class="top-bar" @mousedown.stop>
     <div class="logo">
       <img src="@/assets/logo.png" class="logo-img" />
       <p class="logo-name">留言墙</p>

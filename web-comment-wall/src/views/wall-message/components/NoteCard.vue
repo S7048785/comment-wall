@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { type Card } from "@/types/interface/card";
+import { type MsgCard } from "@/types/interface/card";
 import emitter from "@/utils/emitter";
 
 const {
@@ -52,7 +52,7 @@ const {
   isActive = false,
 } = defineProps<{
   width?: number;
-  card: Card;
+  card: MsgCard;
   isActive?: boolean;
 }>();
 

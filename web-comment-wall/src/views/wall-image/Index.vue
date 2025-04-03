@@ -17,93 +17,137 @@
       <div class="container">
         <div
           class="item"
-          v-for="(item, index) in imageCardListReactivity"
+          @mousedown.stop="ViewToggle(item)"
+          v-for="(item, index) in imageCardListReactive"
           :key="item.id"
         >
           <img :src="item.url" alt="" />
           <div class="bg">
-            <div class="liked" @click="toggleLiked(item)">
-              <heart v-model="item.liked" />
+            <div class="liked" @mousedown.stop @click="toggleLiked(item)">
+              <Heart v-model="item.liked" />
               <span class="count">{{ item.likeCount }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="add" ref="add" v-show="!isModalOpen" @click="">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-xinzeng"></use>
-      </svg>
-    </div> -->
-    <!-- <transition name="modal-fade">
-      <CommentModal v-show="isModalOpen" :card="targetCard" />
-    </transition> -->
+    <div v-show="showViewOpen">
+      <transition name="modal-fade">
+        <CommentModal
+          :card="targetCard"
+          v-show="isModalOpen"
+          v-click-outside="modalToggle"
+        />
+      </transition>
+      <ImageViewer
+        :card="targetCard"
+        @like="toggleLiked"
+        @comment="modalToggle"
+        @viewToggle="ViewToggle"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted } from "vue";
 import emitter from "@/utils/emitter";
-import Heart from "@/components/icons/Heart.vue";
+import ImageViewer from "./components/ImageViewer.vue";
+import { type ImgCard } from "@/types/interface/card";
 import { imgLabelList, imageCardList } from "@/utils/data";
-const imageCardListReactivity = reactive(imageCardList);
+import { useCardStore } from "@/stores/card";
+const imageCardListReactive = reactive<ImgCard[]>(imageCardList);
 const currentLabel = ref(imgLabelList[0]);
 
 // 点击喜欢按钮时触发的事件
-async function toggleLiked(imageCard: any) {
+async function toggleLiked(imageCard: ImgCard) {
+  imageCardListReactive.find((item: ImgCard) => {
+    if (item.id === imageCard.id) {
+      item.liked = !item.liked;
+      item.likeCount += item.liked === true ? 1 : -1;
+    }
+  });
   imageCard.liked = !imageCard.liked;
-  imageCard.likeCount += imageCard.liked === true ? 1 : -1;
   // TODO: 发送喜欢事件
 }
 
-// const add = ref<HTMLDivElement>();
+const add = ref<HTMLDivElement>();
 
 // 监听滚动条，动态调整add的位置
-// function noteHeight() {
-//   // 200为底部栏高度
-//   if (scrollY + innerHeight + 200 >= document.body.scrollHeight) {
-//     (add.value as HTMLDivElement).style.bottom =
-//       scrollY + innerHeight + 200 - document.body.scrollHeight + 50 + "px";
-//   } else {
-//     (add.value as HTMLDivElement).style.bottom = "50px";
-//   }
-// }
+function noteHeight() {
+  // 200为底部栏高度
+  if (scrollY + innerHeight + 200 >= document.body.scrollHeight) {
+    (add.value as HTMLDivElement).style.bottom =
+      scrollY + innerHeight + 200 - document.body.scrollHeight + 50 + "px";
+  } else {
+    (add.value as HTMLDivElement).style.bottom = "50px";
+  }
+}
 
-// 弹窗显示状态
-// const isModalOpen = ref(false);
+let targetCard = ref<ImgCard>({
+  ...(useCardStore().currentImgCard as ImgCard),
+});
 
+const isModalOpen = ref(false);
 /**
  * 切换弹窗状态
  * @param card 卡片数据，若为null，表示关闭弹窗
  */
-// function modalToggle(card?: Card) {
-// 为null时表示点击了卡片以外的区域，所以关闭弹窗
-// if (card == null || card.id == targetCard.value.id) {
-//   isModalOpen.value = false;
-//   targetCard.value.id = "";
+function modalToggle(card?: ImgCard) {
+  // 为null时表示点击了卡片以外的区域，所以关闭弹窗
+  if (card == null || isModalOpen.value === true) {
+    isModalOpen.value = false;
+    // targetCard.value.url = "";
 
-// window.setTimeout(() => {
-//   targetCard.value.id = "";
-// }, 300);
-// return;
-// }
-// 打开当前卡片弹窗
-// isModalOpen.value = true;
-// if (Object.keys(card).length === 0) {
-// 若card为空对象，表示为新增卡片，则使用默认数据
-// targetCard.value = useCardStore().currentCard;
-// } else {
-// targetCard.value = { ...card };
-// }
-// }
+    // window.setTimeout(() => {
+    //   targetCard.value.id = "";
+    // }, 300);
+    return;
+  }
+  // 打开当前卡片弹窗
+  isModalOpen.value = true;
+  if (Object.keys(card).length === 0) {
+    // 若card为空对象，表示为新增卡片，则使用默认数据
+    targetCard.value = useCardStore().currentImgCard;
+  } else {
+    targetCard.value = { ...card };
+  }
+}
+
+const showViewOpen = ref(false);
+/**
+ * 打开预览视图
+ */
+function ViewToggle(card?: ImgCard) {
+  // 为null时表示点击了卡片以外的区域，所以关闭弹窗
+  if (card == null || showViewOpen.value === true) {
+    showViewOpen.value = false;
+    isModalOpen.value = false;
+    targetCard.value.url = "";
+
+    // window.setTimeout(() => {
+    //   targetCard.value.id = "";
+    // }, 300);
+    return;
+  }
+  // 打开当前卡片弹窗
+  showViewOpen.value = true;
+  if (Object.keys(card).length === 0) {
+    // 若card为空对象，表示为新增卡片，则使用默认数据
+    targetCard.value = useCardStore().currentImgCard;
+  } else {
+    targetCard.value = { ...card };
+  }
+}
+
 onMounted(() => {
-  // window.addEventListener("scroll", noteHeight);
+  window.addEventListener("scroll", noteHeight);
   // 绑定弹窗切换事件
-  // emitter.on("modal-toggle", modalToggle);
+  emitter.on("modal-toggle", modalToggle);
 });
 onUnmounted(() => {
-  // window.removeEventListener("scroll", noteHeight);
-  // emitter.off("modal-toggle");
+  window.removeEventListener("scroll", noteHeight);
+  emitter.off("modal-toggle");
 });
 </script>
 

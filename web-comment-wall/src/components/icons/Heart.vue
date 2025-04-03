@@ -1,12 +1,11 @@
 <style scoped>
 .heart-container {
-  --heart-color: rgb(255, 91, 137);
+  --heart-color: #ff5b89;
   position: relative;
   width: 20px;
   /* height: 20px; */
   transition: 0.3s;
 }
-
 .heart-container .checkbox {
   position: absolute;
   width: 100%;

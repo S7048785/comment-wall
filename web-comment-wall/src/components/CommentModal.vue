@@ -1,9 +1,9 @@
 <template>
   <div
     class="comment-modal"
-    v-show="isModalOpen"
-    v-click-outside="close"
     ref="index"
+    @scroll.stop
+    @mousedown.stop="$event != commentArea ? (commentFootShow = false) : ''"
   >
     <div class="modal-head">
       <div class="modal-name">
@@ -14,75 +14,80 @@
         <use xlink:href="#icon-guanbi"></use>
       </svg>
     </div>
-    <!-- <NewCard /> -->
-    <div class="new-card">
-      <div class="colors">
-        <div class="color-li" v-show="currentOption.id === ''">
-          <el-radio-group v-model="currentOption.color" size="large">
+    <!-- MessageCard -->
+    <div id="msg-card" v-show="card.type === 'msg'">
+      <div class="new-card">
+        <div class="colors">
+          <div class="color-li" v-show="currentOption.id === ''">
+            <el-radio-group
+              v-model="(<MsgCard>currentOption).color"
+              size="large"
+            >
+              <el-radio-button
+                v-for="(color, index) in cardColorList"
+                :key="color"
+                :style="{ backgroundColor: color }"
+                :value="color"
+                :disabled="currentOption.id !== ''"
+                :class="{ disabled: currentOption.id !== '' }"
+                size="small"
+              />
+            </el-radio-group>
+          </div>
+        </div>
+        <div
+          class="card-main"
+          :class="{ 'is-user': currentOption.id === '' }"
+          :style="{ backgroundColor: (currentOption as MsgCard).color }"
+        >
+          <div class="card-top">
+            <div class="card-date">{{ currentOption.date }}</div>
+            <div class="card-label">{{ currentOption.label }}</div>
+          </div>
+          <el-input
+            type="textarea"
+            v-model="(currentOption as MsgCard).message"
+            placeholder="留言..."
+            class="message"
+            resize="none"
+            show-word-limit
+            :rows="8"
+            maxlength="75"
+            :readonly="currentOption.id !== ''"
+            input-style="height: 100%"
+          />
+          <el-input
+            placeholder="签名"
+            class="name"
+            :class="{ 'is-focus': nameInput && currentOption.id === '' }"
+            @focus="nameInput = true"
+            @blur="nameInput = false"
+            :readonly="currentOption.id !== ''"
+            v-model="currentOption.username"
+            maxlength="10"
+          />
+        </div>
+      </div>
+
+      <div class="labels" v-show="currentOption.id === ''">
+        <div class="modal-head">
+          <p class="modal-name">选择标签</p>
+        </div>
+        <div class="label-li">
+          <el-radio-group
+            v-model="currentOption.label"
+            :disabled="currentOption.id !== ''"
+            size="large"
+          >
             <el-radio-button
-              v-for="(color, index) in cardColorList"
-              :key="color"
-              :style="{ backgroundColor: color }"
-              :value="color"
+              v-for="(label, index) in cardLabelList.slice(1)"
+              :key="label"
+              :value="label"
+              :label="label"
               :disabled="currentOption.id !== ''"
-              :class="{ disabled: currentOption.id !== '' }"
-              size="small"
-            />
+            ></el-radio-button>
           </el-radio-group>
         </div>
-      </div>
-      <div
-        class="card-main"
-        :class="{ 'is-user': currentOption.id === '' }"
-        :style="{ backgroundColor: currentOption.color }"
-      >
-        <div class="card-top">
-          <div class="card-date">{{ currentOption.date }}</div>
-          <div class="card-label">{{ currentOption.label }}</div>
-        </div>
-        <el-input
-          type="textarea"
-          v-model="currentOption.message"
-          placeholder="留言..."
-          class="message"
-          resize="none"
-          show-word-limit
-          :rows="8"
-          maxlength="75"
-          :readonly="currentOption.id !== ''"
-          input-style="height: 100%"
-        />
-        <el-input
-          placeholder="签名"
-          class="name"
-          :class="{ 'is-focus': nameInput }"
-          @focus="nameInput = true"
-          @blur="nameInput = false"
-          :readonly="currentOption.id !== ''"
-          v-model="currentOption.username"
-          maxlength="10"
-        />
-      </div>
-    </div>
-
-    <div class="labels" v-show="currentOption.id === ''">
-      <div class="modal-head">
-        <p class="modal-name">选择标签</p>
-      </div>
-      <div class="label-li">
-        <el-radio-group
-          v-model="currentOption.label"
-          :disabled="currentOption.id !== ''"
-          size="large"
-        >
-          <el-radio-button
-            v-for="(label, index) in cardLabelList.slice(1)"
-            :key="label"
-            :value="label"
-            :label="label"
-            :disabled="currentOption.id !== ''"
-          ></el-radio-button>
-        </el-radio-group>
       </div>
     </div>
     <div class="comment" v-show="currentOption.id !== ''">
@@ -93,16 +98,18 @@
       </div>
       <div
         class="comment-area"
+        ref="commentArea"
         v-click-outside="() => (commentFootShow = false)"
       >
         <div class="body">
           <el-input
             @focus="commentFootShow = true"
+            @blur="commentFootShow = false"
             v-model="commentMsg"
             ref="commentInput"
           />
         </div>
-        <div class="footer" v-show="commentFootShow">
+        <div class="footer" v-show="commentMsg.trim() || commentFootShow">
           <el-button round @click="comment">发送</el-button>
         </div>
       </div>
@@ -120,7 +127,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import emitter from "@/utils/emitter";
-import { type Card } from "@/types/interface/card";
+import { type ImgCard, type MsgCard } from "@/types/interface/card";
 import { cardColorList, cardLabelList, cardNormal } from "@/utils/data";
 import { useCardStore } from "@/stores/card";
 import CommentContent from "./CommentContent.vue";
@@ -129,7 +136,7 @@ import { ElMessage } from "element-plus";
 const index = ref();
 const cardStore = useCardStore();
 const props = defineProps<{
-  card: Card;
+  card: ImgCard | MsgCard;
 }>();
 
 // 当前卡片数据
@@ -147,17 +154,24 @@ watch(
 // 监听当前卡片数据变化，更新store
 watch(
   () => currentOption.value,
-  (newVal) => {
+  (newVal, oldNal) => {
     if (newVal.id === "") {
-      cardStore.setCurrentCard({ ...newVal });
+      if (newVal.type === "msg") {
+        cardStore.setCurrentMsgCard({ ...newVal });
+      }
+      if (newVal.type === "img") {
+        cardStore.setCurrentImgCard({ ...newVal });
+      }
     }
-    // 数据变化时，跳转到顶部
-    window.setTimeout(() => {
-      index.value.scrollTo({
-        top: 0,
-        behavior: "smooth",
+    if (newVal.id !== oldNal.id) {
+      // 数据变化时，跳转到顶部
+      window.setTimeout(() => {
+        index.value.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
-    });
+    }
   },
   {
     deep: true,
@@ -167,6 +181,7 @@ watch(
 const nameInput = ref(false);
 // 是否显示评论区
 const commentFootShow = ref(false);
+const commentArea = ref();
 // 评论输入框
 const commentInput = ref();
 onMounted(() => {
@@ -186,10 +201,10 @@ function discard() {
   currentOption.value = { ...cardNormal };
   close();
 }
-// 发布
+// 发布留言
 function publish() {
   // 校验留言板是否为空值
-  const temp = currentOption.value;
+  const temp = currentOption.value as MsgCard;
   if (temp.message === "" || temp.username === "") {
     ElMessage.error("留言内容或签名不能为空");
     return;
@@ -220,7 +235,7 @@ function comment() {
 
 <style lang="less" scoped>
 .comment-modal {
-  width: 400px;
+  width: 25%;
   height: 94%;
   position: fixed;
   right: 0px;
@@ -384,6 +399,7 @@ function comment() {
   }
   .comment {
     .modal-head {
+      margin-top: 10px;
       .modal-name {
         span {
           font-size: 14px;

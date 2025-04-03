@@ -6,11 +6,10 @@ export const clickOutside = {
         // 给元素绑定一个事件
         el.EventLis = function (event: any) {
           if (!el.contains(event.target)) {
-            // 如果是外部点击，则执行绑定的函数
-            // console.log(event.target);
+            // 如果点击的元素不在目标元素内部，则执行绑定的函数
+            // console.log(el, event.target);
             // event.stopPropagation();
             binding.value();
-            
           }
         };
         // 在全局添加点击事件监听
