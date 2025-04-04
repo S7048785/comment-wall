@@ -11,7 +11,7 @@ export interface Card {
 
 export interface MsgCard extends Card {
   color?: string;
-  message: string;
+  content: string;
   type: "msg";
 }
 

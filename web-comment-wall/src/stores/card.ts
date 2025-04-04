@@ -10,7 +10,7 @@ export const useCardStore = defineStore("card", () => {
     id: "",
     date: "2025.04.01",
     username: "",
-    message: "",
+    content: "",
     liked: false,
     likeCount: 0,
     commentCount: 0,

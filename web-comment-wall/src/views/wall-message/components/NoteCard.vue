@@ -9,7 +9,7 @@
       <span class="label">{{ card.label }}</span>
     </div>
     <div class="body">
-      {{ card.message }}
+      {{ card.content }}
     </div>
     <div class="foot">
       <div class="foot-left">

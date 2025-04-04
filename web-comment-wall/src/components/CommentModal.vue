@@ -46,7 +46,7 @@
           </div>
           <el-input
             type="textarea"
-            v-model="(currentOption as MsgCard).message"
+            v-model="(currentOption as MsgCard).content"
             placeholder="留言..."
             class="message"
             resize="none"
@@ -205,7 +205,7 @@ function discard() {
 function publish() {
   // 校验留言板是否为空值
   const temp = currentOption.value as MsgCard;
-  if (temp.message === "" || temp.username === "") {
+  if (temp.content === "" || temp.username === "") {
     ElMessage.error("留言内容或签名不能为空");
     return;
   }
