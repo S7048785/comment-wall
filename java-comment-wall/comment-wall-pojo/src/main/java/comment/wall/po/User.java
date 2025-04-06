@@ -1,7 +1,9 @@
 package comment.wall.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +12,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("user")
 public class User {
-    @TableField("id")
-    private Integer id; // 主键ID
+    @TableId("id")
+    private Long id; // 主键ID
 
     @TableField("name")
     private String name; // 用户名

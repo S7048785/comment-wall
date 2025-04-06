@@ -14,12 +14,14 @@ public class Result<T> implements Serializable {
 		Result<T> result = new Result<T>();
 		result.code = 1;
 		result.data = data;
+		result.msg = "success";
 		return result;
 	}
 	
 	public static <T> Result<T> success() {
 		Result<T> result = new Result<T>();
 		result.code = 1;
+		result.setMsg("success");
 		return result;
 	}
 	

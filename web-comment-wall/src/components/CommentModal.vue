@@ -1,169 +1,180 @@
 <template>
-  <div
-    class="comment-modal"
-    ref="index"
-    @scroll.stop
-    @mousedown.stop="$event != commentArea ? (commentFootShow = false) : ''"
-  >
-    <div class="modal-head">
-      <div class="modal-name">
-        写{{ currentOption.id === "" ? "留言" : "评论" }}
-      </div>
+  <transition name="modal-fade">
+    <div
+      :style="{ top: `${top}%`, height: `${100 - top}vh` }"
+      class="comment-modal"
+      ref="index"
+      @mousedown.stop="$event != commentArea ? (commentFootShow = false) : ''"
+    >
+      <div class="modal-head">
+        <div class="modal-name">
+          写{{ currentOption.id === "" ? "留言" : "评论" }}
+        </div>
 
-      <svg class="icon" aria-hidden="true" @click="close">
-        <use xlink:href="#icon-guanbi"></use>
-      </svg>
-    </div>
-    <!-- MessageCard -->
-    <div id="msg-card" v-show="card.type === 'msg'">
-      <div class="new-card">
-        <div class="colors">
-          <div class="color-li" v-show="currentOption.id === ''">
+        <svg class="icon" aria-hidden="true" @click="close">
+          <use xlink:href="#icon-guanbi"></use>
+        </svg>
+      </div>
+      <!-- MessageCard -->
+      <div id="msg-card" v-show="card.type === 'msg'">
+        <div class="new-card">
+          <div class="colors">
+            <div class="color-li" v-show="currentOption.id === ''">
+              <el-radio-group
+                v-model="(<MsgCard>currentOption).color"
+                size="large"
+              >
+                <el-radio-button
+                  v-for="(color, index) in cardColorList"
+                  :key="color"
+                  :style="{ backgroundColor: color }"
+                  :value="color"
+                  :disabled="currentOption.id !== ''"
+                  :class="{ disabled: currentOption.id !== '' }"
+                  size="small"
+                />
+              </el-radio-group>
+            </div>
+          </div>
+          <div
+            class="card-main"
+            :class="{ 'is-user': currentOption.id === '' }"
+            :style="{ backgroundColor: (currentOption as MsgCard).color }"
+          >
+            <div class="card-top">
+              <div class="card-date">{{ currentOption.date }}</div>
+              <div class="card-label">{{ currentOption.label }}</div>
+            </div>
+            <el-input
+              type="textarea"
+              v-model="(currentOption as MsgCard).content"
+              placeholder="留言..."
+              class="message"
+              resize="none"
+              show-word-limit
+              :rows="8"
+              maxlength="75"
+              :readonly="currentOption.id !== ''"
+              input-style="height: 100%"
+            />
+            <el-input
+              placeholder="签名"
+              class="name"
+              :class="{ 'is-focus': nameInput && currentOption.id === '' }"
+              @focus="nameInput = true"
+              @blur="nameInput = false"
+              :readonly="currentOption.id !== ''"
+              v-model="currentOption.username"
+              maxlength="10"
+            />
+          </div>
+        </div>
+
+        <div class="labels" v-show="currentOption.id === ''">
+          <div class="modal-head">
+            <p class="modal-name">选择标签</p>
+          </div>
+          <div class="label-li">
             <el-radio-group
-              v-model="(<MsgCard>currentOption).color"
+              v-model="currentOption.label"
+              :disabled="currentOption.id !== ''"
               size="large"
             >
               <el-radio-button
-                v-for="(color, index) in cardColorList"
-                :key="color"
-                :style="{ backgroundColor: color }"
-                :value="color"
+                v-for="(label, index) in cardLabelList.slice(1)"
+                :key="label"
+                :value="label"
+                :label="label"
                 :disabled="currentOption.id !== ''"
-                :class="{ disabled: currentOption.id !== '' }"
-                size="small"
-              />
+              ></el-radio-button>
             </el-radio-group>
           </div>
         </div>
-        <div
-          class="card-main"
-          :class="{ 'is-user': currentOption.id === '' }"
-          :style="{ backgroundColor: (currentOption as MsgCard).color }"
-        >
-          <div class="card-top">
-            <div class="card-date">{{ currentOption.date }}</div>
-            <div class="card-label">{{ currentOption.label }}</div>
-          </div>
-          <el-input
-            type="textarea"
-            v-model="(currentOption as MsgCard).content"
-            placeholder="留言..."
-            class="message"
-            resize="none"
-            show-word-limit
-            :rows="8"
-            maxlength="75"
-            :readonly="currentOption.id !== ''"
-            input-style="height: 100%"
-          />
-          <el-input
-            placeholder="签名"
-            class="name"
-            :class="{ 'is-focus': nameInput && currentOption.id === '' }"
-            @focus="nameInput = true"
-            @blur="nameInput = false"
-            :readonly="currentOption.id !== ''"
-            v-model="currentOption.username"
-            maxlength="10"
-          />
-        </div>
       </div>
-
-      <div class="labels" v-show="currentOption.id === ''">
+      <div class="comment" v-show="currentOption.id !== ''">
         <div class="modal-head">
-          <p class="modal-name">选择标签</p>
+          <p class="modal-name">
+            评论<span> {{ currentOption.commentCount }}</span>
+          </p>
         </div>
-        <div class="label-li">
-          <el-radio-group
-            v-model="currentOption.label"
-            :disabled="currentOption.id !== ''"
-            size="large"
-          >
-            <el-radio-button
-              v-for="(label, index) in cardLabelList.slice(1)"
-              :key="label"
-              :value="label"
-              :label="label"
-              :disabled="currentOption.id !== ''"
-            ></el-radio-button>
-          </el-radio-group>
-        </div>
-      </div>
-    </div>
-    <div class="comment" v-show="currentOption.id !== ''">
-      <div class="modal-head">
-        <p class="modal-name">
-          评论<span> {{ 123 }}</span>
-        </p>
-      </div>
-      <div
-        class="comment-area"
-        ref="commentArea"
-        v-click-outside="() => (commentFootShow = false)"
-      >
-        <div class="body">
-          <el-input
-            @focus="commentFootShow = true"
-            @blur="commentFootShow = false"
-            v-model="commentMsg"
-            ref="commentInput"
-          />
-        </div>
-        <div class="footer" v-show="commentMsg.trim() || commentFootShow">
-          <el-button round @click="comment">发送</el-button>
+        <div
+          class="comment-area"
+          ref="commentArea"
+          @mousedown.stop
+          v-click-outside="() => (commentFootShow = false)"
+        >
+          <div class="body">
+            <el-input
+              @focus="commentFootShow = true"
+              v-model="commentMsg"
+              ref="commentInput"
+            />
+          </div>
+          <div class="footer" v-show="commentMsg.trim() || commentFootShow">
+            <el-button round @click="comment(card.id)">发送</el-button>
+          </div>
         </div>
       </div>
+      <div class="contents" v-show="currentOption.id !== ''">
+        <CommentContent :comments="userCommentList" />
+      </div>
+      <div class="comment-btn" v-show="currentOption.id === ''">
+        <el-button class="discard" round @click="discard">丢弃</el-button>
+        <el-button class="publish" round @click="publish">发布</el-button>
+      </div>
     </div>
-    <div class="contents" v-show="currentOption.id !== ''">
-      <CommentContent />
-    </div>
-    <div class="comment-btn" v-show="currentOption.id === ''">
-      <el-button class="discard" round @click="discard">丢弃</el-button>
-      <el-button class="publish" round @click="publish">发布</el-button>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import emitter from "@/utils/emitter";
 import { type ImgCard, type MsgCard } from "@/types/interface/card";
-import { cardColorList, cardLabelList, cardNormal } from "@/utils/data";
+import {
+  cardColorList,
+  cardLabelList,
+  cardNormal,
+  userComments as uc,
+} from "@/utils/data";
 import { useCardStore } from "@/stores/card";
 import CommentContent from "./CommentContent.vue";
 import { ElMessage } from "element-plus";
-// 获取dom
-const index = ref();
+import { type UserComment } from "@/types/interface/user";
+// 评论数据
+const userCommentList = ref<UserComment[]>(uc);
+
 const cardStore = useCardStore();
-const props = defineProps<{
+const { card, top = 0 } = defineProps<{
   card: ImgCard | MsgCard;
+  top?: number;
+}>();
+const emit = defineEmits<{
+  comment: [cardId: string];
 }>();
 
 // 当前卡片数据
-const currentOption = ref({ ...props.card });
-
-const isModalOpen = ref(true);
+const currentOption = ref({ ...card });
 // 监听父组件传递的卡片数据变化，更新当前卡片数据
 watch(
-  () => props.card,
+  () => card,
   (newVal) => {
     currentOption.value = { ...newVal };
-    // console.log(newVal);
   }
 );
 // 监听当前卡片数据变化，更新store
 watch(
   () => currentOption.value,
-  (newVal, oldNal) => {
+  (newVal, oldVal) => {
+    // id 为空时，表明是新建留言
     if (newVal.id === "") {
       if (newVal.type === "msg") {
         cardStore.setCurrentMsgCard({ ...newVal });
       }
-      if (newVal.type === "img") {
-        cardStore.setCurrentImgCard({ ...newVal });
-      }
     }
-    if (newVal.id !== oldNal.id) {
+    if (newVal.type === "img") {
+      cardStore.setCurrentImgCard({ ...newVal });
+    }
+    if (newVal.id !== oldVal.id) {
       // 数据变化时，跳转到顶部
       window.setTimeout(() => {
         index.value.scrollTo({
@@ -177,6 +188,7 @@ watch(
     deep: true,
   }
 );
+const index = ref();
 // 标记签名输入框 是否聚焦
 const nameInput = ref(false);
 // 是否显示评论区
@@ -184,14 +196,7 @@ const commentFootShow = ref(false);
 const commentArea = ref();
 // 评论输入框
 const commentInput = ref();
-onMounted(() => {
-  emitter.on("commentFocus", () => {
-    commentInput.value.focus();
-  });
-});
-onUnmounted(() => {
-  emitter.off("commentFocus");
-});
+
 // 关闭弹窗
 function close() {
   emitter.emit("modal-toggle");
@@ -206,12 +211,21 @@ function publish() {
   // 校验留言板是否为空值
   const temp = currentOption.value as MsgCard;
   if (temp.content === "" || temp.username === "") {
-    ElMessage.error("留言内容或签名不能为空");
+    ElMessage({
+      message: "留言内容或签名不能为空",
+      type: "error",
+      plain: true,
+    });
     return;
   }
   // 校验留言板是否为当前用户所属
   if (currentOption.value.id !== "") {
-    ElMessage.error("当前留言非您所属 无法发布");
+    ElMessage({
+      message: "当前留言非您所属 无法发布",
+      type: "error",
+      plain: true,
+    });
+    ElMessage.error("");
     return;
   }
 
@@ -221,32 +235,66 @@ function publish() {
 // 留言评论
 const commentMsg = ref("");
 // 发送评论
-function comment() {
+function comment(cardId: string) {
   // 判断空值
   const msg = commentMsg.value.trim();
   if (msg === "") {
-    ElMessage.error("评论内容不能为空");
+    ElMessage({
+      message: "评论内容不能为空",
+      type: "error",
+      plain: true,
+    });
     return;
   }
 
-  // TODO: 发送评论 请求
+  // TODO: 发送评论请求 返回用户当前评论
+
+  // 更新数组
+  userCommentList.value.unshift({
+    id: `${Date.now()}`,
+    img: "https://fastly.picsum.photos/id/379/40/40.jpg?hmac=lwSn1UyxHXRH5kA1301wSCaTS5P8tU7Ojq5cLsnAKis",
+    name: currentOption.value.username || "测试",
+    content: msg,
+    date: new Date().toLocaleString(),
+  });
+  console.log(userCommentList.value);
+
+  // 善后操作
+  ElMessage({
+    message: "评论成功",
+    type: "success",
+    plain: true,
+  });
+  currentOption.value.commentCount++;
+  commentMsg.value = "";
+  // 评论数+1
+  emit("comment", cardId);
 }
+
+onMounted(() => {
+  emitter.on("commentFocus", () => {
+    commentInput.value.focus();
+  });
+  // currentOption.value = { ...card };
+});
+onUnmounted(() => {
+  emitter.off("commentFocus");
+});
 </script>
 
 <style lang="less" scoped>
 .comment-modal {
-  width: 25%;
-  height: 94%;
+  width: 400px;
+  height: 100vh;
   position: fixed;
   right: 0px;
-  top: 6%;
-  z-index: 1000;
+  top: 0px;
+  z-index: 102;
   background-color: #ffffffcc;
   box-shadow: 0px 0px 20px 0px #00000014;
   backdrop-filter: blur(10px);
   padding: 20px;
-  // padding-bottom: 50px;
-  overflow-y: auto;
+  overflow: auto;
   .modal-head {
     display: flex;
     justify-content: space-between;
@@ -453,6 +501,24 @@ function comment() {
       // color: black;
       // outline: none;
     }
+  }
+}
+.modal-fade-enter-active {
+  /*from*/
+  animation: ani 0.3s;
+}
+.modal-fade-leave-active {
+  /*to*/
+  animation: ani 0.3s reverse;
+}
+
+/*动画样式*/
+@keyframes ani {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
 </style>

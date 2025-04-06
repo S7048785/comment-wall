@@ -2,9 +2,12 @@
 .heart-container {
   --heart-color: #ff5b89;
   position: relative;
-  width: 20px;
+  /* width: 20px; */
   /* height: 20px; */
+  width: 100%;
+  height: 100%;
   transition: 0.3s;
+  /* margin-right: 0px !important; */
 }
 .heart-container .checkbox {
   position: absolute;
@@ -91,7 +94,7 @@ const val = defineModel();
 
 <template>
   <div class="heart-container" title="Like">
-    <input type="checkbox" class="checkbox" id="Give-It-An-Id" v-model="val" />
+    <input type="checkbox" class="checkbox" v-model="val" />
     <div class="svg-container">
       <svg
         viewBox="0 0 24 24"

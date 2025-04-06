@@ -18,7 +18,7 @@ const { y } = useScroll(window);
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 100;
   &.show {
     display: block;
   }

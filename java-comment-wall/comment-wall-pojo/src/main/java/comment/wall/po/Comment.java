@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,16 +18,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("comment")
-public class Comment {
+public class Comment implements Serializable {
     @TableId(type = IdType.AUTO)
-    private int id; // 主键ID，自增
+    private Long id; // 主键ID，自增
+    
+    @TableField("card_id")
+    private Long cardId;
 
     @TableField("user_id")
-    private int userId; // 用户ID
+    private Long userId; // 用户ID
 
     @TableField("content")
     private String content; // 评论内容
+    
+    @TableField("category")
+    private Integer category;
 
     @TableField("create_time")
     private LocalDateTime createTime; // 创建时间
+    
+    @TableField("deleted")
+    private Boolean deleted;
 }

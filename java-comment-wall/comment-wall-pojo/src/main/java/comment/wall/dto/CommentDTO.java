@@ -1,11 +1,12 @@
 package comment.wall.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class CommentDTO {
+public class CommentDTO implements Serializable {
+	private Long userId;
+	private Long cardId;
+	private String content;
+	private Integer category;
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LabelVO {
-	private Integer id; // 主键ID，自增
+	private Long id; // 主键ID，自增
 	
 	private String name; // 标签名称
 }

@@ -16,7 +16,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CardImageVO {
-	private Integer id; // 主键ID
+	private Long id; // 主键ID
+	
+	private Long userId; // 用户ID
 	
 	private String userName; // 用户名
 	

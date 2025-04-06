@@ -4,7 +4,12 @@
   <groupId>comment.wall</groupId>
   <artifactId>java-comment-wall</artifactId>
   <version>1.0-SNAPSHOT</version>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
   <packaging>pom</packaging>
   <name>Archetype - java-comment-wall</name>
   <url>http://maven.apache.org</url>
@@ -47,11 +52,15 @@
           <artifactId>hutool-all</artifactId>
           <version>5.8.11</version>
       </dependency>
-      <!-- swagger -->
       <dependency>
           <groupId>com.github.xiaoymin</groupId>
           <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
           <version>${knife4j}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springdoc</groupId>
+          <artifactId>springdoc-openapi-ui</artifactId>
+          <version>1.6.14</version>
       </dependency>
 </dependencies>
 

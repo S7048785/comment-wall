@@ -4,35 +4,73 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6174c2a-b41e-4740-8ddc-2c5c950d910b" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-pojo/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/stores/card.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/types/interface/card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/types/interface/card.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/utils/data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/utils/data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/components/NoteCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/components/NoteCard.vue" afterDir="false" />
+    <list default="true" id="5436ccaf-9814-4130-89bf-dca762337c1c" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/CommentConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/FieldConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/exception/CommentErrorException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CommentPageQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/MybatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/WebMvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardImageMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CommentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/test/java/comment/wall/CommentTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/MessageConstant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/PageResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/PageResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardImageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardImageDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardMessageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardMessageDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CommentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CommentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/LabelDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/LabelDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Label.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardImageVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardImageVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardMessageVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardMessageVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CommentVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CommentVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/LabelVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/LabelVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardImageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardMessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardMessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardImageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardImageMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardMessageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardMessageMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardMessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardImageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardMessageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardMessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardMessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Mybatis Mapper" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -45,32 +83,56 @@
   <component name="MavenRunner">
     <option name="jreName" value="17" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
-  <component name="ProjectId" id="2vE5iay2E3iwM3q2OiTM2tugcmo" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2vFu3aHOMRLiYzPNysuamxV7Y5i" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "17",
-    "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.CommentTests.testGetComment.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Code/Projects/CangQiong/sky-take-out&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facet&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="comment.wall" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.CommentTests.testGetComment">
     <configuration default="true" type="FlutterRunConfigurationType" factoryName="Flutter" editBeforeRun="true">
       <method v="2" />
     </configuration>
@@ -80,30 +142,50 @@
       <option name="additionalArgs" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CommentWallServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="CommentTests.testGetComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="comment-wall-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="comment.wall.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="comment.wall" />
+      <option name="MAIN_CLASS_NAME" value="comment.wall.CommentTests" />
+      <option name="METHOD_NAME" value="testGetComment" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="comment-wall-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="comment.wall.CommentWallServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.9-corretto-17.0.9-f644763e9732-ebaef533" />
-      </set>
-    </attachedChunks>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CommentTests.testGetComment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="b6174c2a-b41e-4740-8ddc-2c5c950d910b" name="更改" comment="" />
-      <created>1743697520815</created>
+      <changelist id="5436ccaf-9814-4130-89bf-dca762337c1c" name="更改" comment="" />
+      <created>1743752946958</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1743697520815</updated>
-      <workItem from="1743697522650" duration="3715000" />
+      <updated>1743752946958</updated>
+      <workItem from="1743752949351" duration="214000" />
+      <workItem from="1743753176536" duration="4000" />
+      <workItem from="1743753249866" duration="5013000" />
+      <workItem from="1743789088926" duration="1849000" />
+      <workItem from="1743840997781" duration="1603000" />
+      <workItem from="1743842620577" duration="18914000" />
+      <workItem from="1743918465429" duration="3085000" />
     </task>
     <servers />
   </component>

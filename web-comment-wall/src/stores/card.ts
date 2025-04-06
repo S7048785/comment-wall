@@ -33,7 +33,7 @@ export const useCardStore = defineStore("card", () => {
     currentMsgCard.value = card;
   }
   function setCurrentImgCard(card: ImgCard) {
-    currentMsgCard.value = card;
+    currentImgCard.value = card;
   }
 
   return {

@@ -1,43 +1,90 @@
 <template>
   <div class="image-viewer">
-    <div class="image-container" v-click-outside="() => $emit('viewToggle')">
+    <div class="image-container" v-click-outside="exitView">
       <!-- <div > -->
-      <img :src="$props.card.url" alt="" @mousedown.stop="$emit('comment')" />
+      <img :src="card.url" alt="" @mousedown="modalOpen(false)" />
 
       <!-- </div> -->
     </div>
     <div class="btn-group" @mousedown.stop>
       <el-button-group>
-        <el-button size="default" @click="$emit('like', $props.card)">
-          <Heart v-model="$props.card.liked" />
+        <el-button size="default" @click="$emit('like', card)">
+          <Heart v-model="card.liked" />
         </el-button>
-        <el-button size="default" @click="$emit('comment', $props.card)">
+        <el-button size="default" @click="modalOpen(!isModalOpen)">
           <svg class="icon comment" aria-hidden="true">
             <use xlink:href="#icon-pinglun"></use>
           </svg>
         </el-button>
       </el-button-group>
     </div>
+    <div>
+      <CommentModal
+        :card="delayCard"
+        v-show="isModalOpen"
+        v-click-outside="() => modalOpen(false)"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, onUnmounted } from "vue";
 import { type ImgCard } from "@/types/interface/card";
 import emitter from "@/utils/emitter";
-const props = defineProps<{
+import { useCardStore } from "@/stores/card";
+const { card } = defineProps<{
   card: ImgCard;
 }>();
+
+const emit = defineEmits<{
+  like: [card: ImgCard];
+  viewToggle: [];
+}>();
+
+// 延迟传递卡片数据 （只有打开弹窗时才传递）
+const delayCard = ref<ImgCard>(card);
+const isModalOpen = ref(false);
+/**
+ * 切换弹窗状态
+ * @param state 卡片显示状态
+ */
+function modalOpen(state: boolean) {
+  isModalOpen.value = state;
+  if (state) {
+    delayCard.value = { ...card };
+  }
+}
+
+/**
+ * 退出预览视图
+ */
+function exitView() {
+  if (!isModalOpen.value) {
+    emit("viewToggle");
+  }
+}
+function ESCExitView(event: KeyboardEvent) {
+  if (event.key === "Escape") {
+    emit("viewToggle");
+  }
+}
+onMounted(() => {
+  document.addEventListener("keydown", ESCExitView);
+});
+onUnmounted(() => {
+  document.removeEventListener("keydown", ESCExitView);
+});
 </script>
 
 <style lang="less" scoped>
 .image-viewer {
   position: fixed;
-  top: 6%;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 94%;
-  z-index: 1;
+  height: 100%;
+  z-index: 101;
   background-color: #080808a1;
   // 背景模糊
   backdrop-filter: blur(10px);
@@ -70,6 +117,10 @@ const props = defineProps<{
       justify-content: center;
       border: none;
       box-shadow: none;
+      .heart-container {
+        width: 20px;
+        height: 20px;
+      }
     }
     button {
       // margin-right: 10px;

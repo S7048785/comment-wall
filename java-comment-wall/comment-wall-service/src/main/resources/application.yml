@@ -1,11 +1,15 @@
+server:
+  port: 8080
 spring:
+  profiles:
+    active: dev
   application:
     name: comment-wall-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${comment.wall.datasource.url}
-    username: ${novel.datasource.username}
-    password: ${novel.datasource.password}
+    username: ${comment.wall.datasource.username}
+    password: ${comment.wall.datasource.password}
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: comment.wall.po
@@ -16,12 +20,14 @@ mybatis-plus:
     db-config:
       id-type: auto
       update-strategy: not_null
-server:
-  port: 8080
+
+springdoc:
+  # 默认是false，需要设置为true
+  default-flat-param-object: true
 logging:
   level:
-    com:
-      sky:
+    comment:
+      wall:
         mapper: debug
         service: info
         controller: info

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="comment.wall.mapper.CardImageMapper">
+
+    <select id="queryCardById" resultType="comment.wall.vo.CardImageVO">
+        select card_image.id,
+               user.name as user_name,
+               card_image.url,
+               label.name as label,
+               card_image.like_count as like_count,
+               card_image.comment_count as comment_count
+        from card_image
+                 left join label on card_image.label_id = label.id
+                 left join user on card_image.user_id = user.id
+        where card_image.id = #{cardId};
+    </select>
+    <select id="pageQueryCard" resultType="comment.wall.vo.CardImageVO">
+        select card_image.id,
+               user.id as user_id,
+               user.name as user_name,
+               card_image.url,
+               label.name as label,
+               card_image.like_count as like_count,
+               card_image.comment_count as comment_count,
+               card_image.create_time as create_time
+        from card_image
+                 left join label on card_image.label_id = label.id
+                 left join user on card_image.user_id = user.id
+        <where>
+            <if test="labelId != null">
+                label.id = #{labelId}
+            </if>
+        </where>
+        limit #{page}, #{pageSize}
+    </select>
+</mapper>

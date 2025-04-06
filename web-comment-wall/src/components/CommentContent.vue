@@ -1,32 +1,36 @@
 <template>
   <div class="comment-content">
-    <div class="comment-content-box" v-for="(item, index) in userComments">
+    <div class="comment-content-box" v-for="(item, index) in comments">
       <div class="left">
-      <div class="img" :style="`background-image: url('${item.img}')`"></div>
+        <div class="img" :style="`background-image: url('${item.img}')`"></div>
       </div>
       <div class="right">
-        <div class="name"><span>{{ item.name }}</span></div>
+        <div class="name">
+          <span>{{ item.name }}</span>
+        </div>
         <div class="content">{{ item.content }}</div>
         <div class="date">{{ item.date }}</div>
       </div>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { userComments } from '@/utils/data';
+import { type UserComment } from "@/types/interface/user";
+const { comments } = defineProps<{
+  comments: UserComment[];
+}>();
+console.log(comments);
 </script>
 
 <style scoped lang="less">
 .comment-content {
-  display: flex;
-  flex-wrap: wrap;
   .comment-content-box {
     position: relative;
     // margin-bottom: 20px;
     &::after {
       display: block;
-      content: '';
+      content: "";
       width: 100%;
       height: 1px;
       margin-block: 15px;
@@ -59,7 +63,6 @@ import { userComments } from '@/utils/data';
         align-items: center;
       }
       .content {
-
       }
       .date {
         text-align: right;
@@ -69,6 +72,5 @@ import { userComments } from '@/utils/data';
       }
     }
   }
-  
 }
 </style>

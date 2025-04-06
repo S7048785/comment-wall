@@ -53,7 +53,7 @@ const send = () =>
 .top-bar {
   padding: 10px 30px;
   width: 100%;
-  height: 58px;
+  height: 61px;
   background-color: rgba(255, 255, 255);
   box-shadow: 0px 0px 5px 0px #ccc;
   display: flex;

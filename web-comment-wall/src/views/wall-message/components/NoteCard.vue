@@ -13,15 +13,16 @@
     </div>
     <div class="foot">
       <div class="foot-left">
-        <div class="like" @click="likeActive" @mousedown.stop>
+        <div class="like" @click="$emit('like', card.id)" @mousedown.stop>
           <span class="like-icon">
-            <svg
+            <Heart v-model="card.liked" />
+            <!-- <svg
               class="icon"
               aria-hidden="true"
               :style="{ color: card.liked ? 'red' : '' }"
             >
               <use :xlink:href="`#icon-aixin${card.liked ? '1' : ''}`"></use>
-            </svg>
+            </svg> -->
           </span>
           <span class="like-count">{{ card.likeCount }}</span>
         </div>
@@ -56,19 +57,14 @@ const {
   isActive?: boolean;
 }>();
 
+defineEmits<{
+  like: [cardId: string];
+}>();
 // const dateStr = computed(() => {
 //   return `${card.date.getFullYear()}.${("0" + (card.date.getMonth() + 1)).slice(
 //     -2
 //   )}.${("0" + card.date.getDate()).slice(-2)}`;
 // });
-
-// 点赞功能
-function likeActive(event: MouseEvent) {
-  event.stopPropagation();
-  console.log("like");
-  card.liked = !card.liked;
-  // 发送点赞请求接口
-}
 
 // 评论功能
 function commentActive() {
@@ -129,10 +125,20 @@ onMounted(() => {
       flex: 1;
       justify-content: flex-start;
       div {
-        margin-right: 10px;
-        &.like:hover {
-          color: red;
-          cursor: pointer;
+        &.like {
+          display: flex;
+          margin-right: 10px;
+          .heart-container {
+            width: 17px;
+            height: 17px;
+          }
+          &:hover {
+            color: red;
+            cursor: pointer;
+          }
+        }
+        &.comment {
+          display: flex;
         }
         &.comment:hover {
           cursor: pointer;
@@ -145,6 +151,7 @@ onMounted(() => {
       }
       span[class$="icon"] {
         font-size: 12px;
+        margin-right: 5px;
       }
     }
     .foot-right {

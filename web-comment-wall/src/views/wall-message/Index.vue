@@ -19,6 +19,7 @@
         :key="item.id"
         :card="item"
         :isActive="isModalOpen && targetCard.id === item.id"
+        @like="likeActive(item)"
         @mousedown.stop="modalToggle(item)"
       />
     </div>
@@ -32,13 +33,15 @@
         <use xlink:href="#icon-xinzeng"></use>
       </svg>
     </div>
-    <transition name="modal-fade">
-      <CommentModal
-        v-show="isModalOpen"
-        :card="targetCard"
-        v-click-outside="modalToggle"
-      />
-    </transition>
+    <!-- <transition name="modal-fade"> -->
+    <CommentModal
+      v-show="isModalOpen"
+      :top="8"
+      :card="targetCard"
+      @comment="CommentActive"
+      v-click-outside="modalToggle"
+    />
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -207,6 +210,25 @@ const cardList = reactive<MsgCard[]>([
   },
 ]);
 
+// 点赞
+function likeActive(card: MsgCard) {
+  card.liked = !card.liked;
+  card.likeCount += card.liked === true ? 1 : -1;
+  // TODO: 发送点赞请求
+}
+
+// 评论成功
+function CommentActive(cardId: string) {
+  console.log(cardId);
+
+  cardList.forEach((item) => {
+    if (item.id === cardId) {
+      item.commentCount += 1;
+      console.log(item);
+    }
+  });
+}
+
 const add = ref<HTMLDivElement>();
 
 // 监听滚动条，动态调整add的位置
@@ -221,7 +243,6 @@ function noteHeight() {
 }
 // 弹窗显示状态
 const isModalOpen = ref(false);
-
 /**
  * 切换弹窗状态
  * @param card 卡片数据，若为null，表示关闭弹窗
@@ -335,24 +356,6 @@ onUnmounted(() => {
     &:hover {
       background-color: #000;
       transform: rotate(180deg);
-    }
-  }
-  .modal-fade-enter-active {
-    /*from*/
-    animation: ani 0.3s;
-  }
-  .modal-fade-leave-active {
-    /*to*/
-    animation: ani 0.3s reverse;
-  }
-
-  /*动画样式*/
-  @keyframes ani {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
     }
   }
 }

@@ -16,4 +16,15 @@ public class PageResult<T> implements Serializable {
 	
 	private List<T> records; //当前页数据集合
 	
+	private int page; //当前页
+	
+	private int pageSize; //每页记录数
+	
+	
+	public PageResult(List<T> cardMessagePage, int page, int pageSize) {
+		this.total = cardMessagePage.size();
+		this.records = cardMessagePage;
+		this.page = page;
+		this.pageSize = pageSize;
+	}
 }

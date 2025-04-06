@@ -16,7 +16,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CardMessageVO {
-	private int id; // 主键ID，自增
+	private Long id; // 主键ID，自增
+	
+	private Long userId;
 	
 	private String userName; // 用户名
 	
@@ -24,7 +26,7 @@ public class CardMessageVO {
 	
 	private String content; // 卡片内容
 	
-	private String label; // 标签ID
+	private String label; // 标签
 	
 	private int likeCount; // 点赞数
 	

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,15 +14,13 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @TableName("card_message")
 public class CardMessage {
     @TableId(type = IdType.AUTO)
-    private int id; // 主键ID，自增
+    private Long id; // 主键ID，自增
 
     @TableField("user_id")
-    private int userId; // 用户ID
+    private Long userId; // 用户ID
 
     @TableField("color")
     private String color; // 卡片颜色
@@ -30,14 +29,17 @@ public class CardMessage {
     private String content; // 卡片内容
 
     @TableField("label_id")
-    private int labelId; // 标签ID
+    private Integer labelId; // 标签ID
 
     @TableField("like_count")
-    private int likeCount; // 点赞数
+    private Integer likeCount; // 点赞数
 
     @TableField("comment_count")
-    private int commentCount; // 评论数
+    private Integer commentCount; // 评论数
 
     @TableField("create_time")
     private LocalDateTime createTime; // 创建时间
+    
+    @TableField("update_time")
+    private LocalDateTime updateTime; // 更新时间
 }
