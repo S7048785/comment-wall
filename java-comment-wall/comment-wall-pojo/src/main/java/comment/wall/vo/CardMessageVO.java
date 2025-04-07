@@ -3,11 +3,13 @@ package comment.wall.vo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +22,7 @@ public class CardMessageVO {
 	
 	private Long userId;
 	
-	private String userName; // 用户名
+	private String username; // 用户名
 	
 	private String color; // 卡片颜色
 	
@@ -32,5 +34,8 @@ public class CardMessageVO {
 	
 	private int commentCount; // 评论数
 	
-	private LocalDateTime createTime; // 创建时间
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDateTime date; // 创建时间
+	
+	private String type = "msg";
 }

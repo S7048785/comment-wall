@@ -13,7 +13,7 @@
     </div>
     <div class="foot">
       <div class="foot-left">
-        <div class="like" @click="$emit('like', card.id)" @mousedown.stop>
+        <div class="like" @click="$emit('like', card.id)" @mouseup.stop>
           <span class="like-icon">
             <Heart v-model="card.liked" />
             <!-- <svg
@@ -26,7 +26,7 @@
           </span>
           <span class="like-count">{{ card.likeCount }}</span>
         </div>
-        <div class="comment" @click="commentActive">
+        <div class="comment" @click="commentActive" @mouseup.stop>
           <span class="comment-icon">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-pinglun"></use>
@@ -59,6 +59,7 @@ const {
 
 defineEmits<{
   like: [cardId: string];
+  comment: [void];
 }>();
 // const dateStr = computed(() => {
 //   return `${card.date.getFullYear()}.${("0" + (card.date.getMonth() + 1)).slice(
@@ -68,9 +69,8 @@ defineEmits<{
 
 // 评论功能
 function commentActive() {
-  console.log("comment");
   // 触发聚焦
-  emitter.emit("commentFocus");
+  emitter.emit("commentFocus", card);
 }
 
 onMounted(() => {
@@ -89,7 +89,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 200px;
+  min-height: 100px;
   padding: 20px;
   background-color: @card-color-2;
   transition: all 0.3s ease;
@@ -101,24 +101,24 @@ onMounted(() => {
   .top {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
     span {
       font-size: @size-14;
       color: #888;
     }
   }
   .body {
-    display: flex;
     // height: 100%;
-    text-indent: 1em;
     font-size: 16px;
+    text-align: center;
     letter-spacing: 2px;
-    justify-content: center;
     // overflow-x: hidden;
-    white-space: wrap;
+    white-space: pre-wrap !important;
     font-family: Arial, Helvetica, sans-serif;
   }
   .foot {
     display: flex;
+    margin-top: 10px;
     justify-content: space-between;
     .foot-left {
       display: flex;

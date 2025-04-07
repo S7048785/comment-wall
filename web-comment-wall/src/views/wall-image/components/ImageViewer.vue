@@ -2,11 +2,11 @@
   <div class="image-viewer">
     <div class="image-container" v-click-outside="exitView">
       <!-- <div > -->
-      <img :src="card.url" alt="" @mousedown="modalOpen(false)" />
+      <img :src="card.url" alt="" @mouseup="modalOpen(false)" />
 
       <!-- </div> -->
     </div>
-    <div class="btn-group" @mousedown.stop>
+    <div class="btn-group" @mouseup.stop>
       <el-button-group>
         <el-button size="default" @click="$emit('like', card)">
           <Heart v-model="card.liked" />
@@ -29,14 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { type ImgCard } from "@/types/interface/card";
-import emitter from "@/utils/emitter";
-import { useCardStore } from "@/stores/card";
 const { card } = defineProps<{
   card: ImgCard;
 }>();
-
 const emit = defineEmits<{
   like: [card: ImgCard];
   viewToggle: [];
@@ -45,6 +42,7 @@ const emit = defineEmits<{
 // 延迟传递卡片数据 （只有打开弹窗时才传递）
 const delayCard = ref<ImgCard>(card);
 const isModalOpen = ref(false);
+
 /**
  * 切换弹窗状态
  * @param state 卡片显示状态
@@ -66,7 +64,11 @@ function exitView() {
 }
 function ESCExitView(event: KeyboardEvent) {
   if (event.key === "Escape") {
-    emit("viewToggle");
+    if (isModalOpen.value) {
+      modalOpen(false);
+    } else {
+      emit("viewToggle");
+    }
   }
 }
 onMounted(() => {

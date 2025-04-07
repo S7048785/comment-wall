@@ -20,7 +20,6 @@ import { type UserComment } from "@/types/interface/user";
 const { comments } = defineProps<{
   comments: UserComment[];
 }>();
-console.log(comments);
 </script>
 
 <style scoped lang="less">

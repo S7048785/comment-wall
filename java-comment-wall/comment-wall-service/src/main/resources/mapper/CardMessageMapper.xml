@@ -6,13 +6,13 @@
     <select id="getByCardId" resultType="comment.wall.vo.CardMessageVO">
         select card_message.id,
                user.id as user_id,
-               user.name as user_name,
+               user.name as username,
                card_message.color,
                card_message.content,
                label.name as label,
                card_message.like_count as like_count,
                card_message.comment_count as comment_count,
-               card_message.create_time as create_time
+               card_message.create_time as date
         from card_message
                  left join label on card_message.label_id = label.id
                  left join user on card_message.user_id = user.id
@@ -21,13 +21,13 @@
     <select id="pageQueryCard" resultType="comment.wall.vo.CardMessageVO">
         select cm.id,
                user.id   as userId,
-               user.name  as userName,
+               user.name  as username,
                color,
                content,
                label.name as label,
                like_count,
                comment_count,
-               cm.create_time
+               cm.create_time as date
         from card_message as cm
                  left join label on cm.label_id = label.id
                  left join user on cm.user_id = user.id

@@ -1,4 +1,4 @@
-import { Label, imgLabel } from "@/types/enum/label";
+import { msgLabel } from "@/utils/data";
 export interface Card {
   id: string;
   date?: string;

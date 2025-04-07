@@ -8,6 +8,7 @@ import comment.wall.dto.CardImageDTO;
 import comment.wall.dto.CardPageQueryDTO;
 import comment.wall.exception.CardErrorException;
 import comment.wall.mapper.CardImageMapper;
+import comment.wall.mapper.CommentMapper;
 import comment.wall.po.CardImage;
 import comment.wall.po.Comment;
 import comment.wall.service.ICardImageService;
@@ -25,7 +26,7 @@ public class CardImageServiceImpl extends ServiceImpl<CardImageMapper, CardImage
 	@Autowired
 	private CardImageMapper cardImageMapper;
 	@Autowired
-	private ICommentService commentService;
+	private CommentMapper commentMapper;
 	/**
 	 * 根据id获取留言卡片信息
 	 * @param cardId
@@ -96,7 +97,7 @@ public class CardImageServiceImpl extends ServiceImpl<CardImageMapper, CardImage
 	@Override
 	public Boolean deleteCard(Integer category, Long cardId) {
 		// 先删除评论 再删除卡片
-		commentService.remove(
+		commentMapper.delete(
 				new LambdaQueryWrapper<Comment>()
 						.eq(Comment::getCategory, category)
 						.eq(Comment::getCardId, cardId)

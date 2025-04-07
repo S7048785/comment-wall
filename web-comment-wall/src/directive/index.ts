@@ -13,12 +13,12 @@ export const clickOutside = {
           }
         };
         // 在全局添加点击事件监听
-        document.addEventListener("mousedown", el.EventLis);
+        document.addEventListener("mouseup", el.EventLis);
       },
       unmounted(el: any, binding: any) {
         // 在全局移除点击事件监听
 
-        document.removeEventListener("mousedown", el.EventLis);
+        document.removeEventListener("mouseup", el.EventLis);
       },
     });
   },

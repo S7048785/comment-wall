@@ -23,7 +23,7 @@
         show-word-limit
         :rows="8"
         maxlength="120"
-        input-style="height: 100%"
+        input-style="height: 100%;"
       />
       <el-input
         placeholder="签名"
@@ -38,13 +38,13 @@
 
 <script setup lang="ts">
 import { ref, reactive, toRef, computed } from "vue";
-import { cardColorList, cardLabelList } from "@/utils/data";
+import { cardColorList, msgLabel } from "@/utils/data";
 
 const currentOption = reactive({
   name: "",
   message: "",
   color: cardColorList[0],
-  label: cardLabelList[1],
+  label: msgLabel[1],
 });
 </script>
 
@@ -94,9 +94,11 @@ const currentOption = reactive({
     box-sizing: border-box;
     .message {
       flex: 6;
+      text-align: center;
     }
     .name {
       // flex: 1;
+      text-align: center;
     }
     :deep(.el-textarea__inner) {
       box-shadow: none;

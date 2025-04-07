@@ -29,4 +29,5 @@ public class CardImageVO {
 	private Integer likeCount; // 点赞数
 	
 	private Integer commentCount; // 评论数
+	private String type = "img";
 }

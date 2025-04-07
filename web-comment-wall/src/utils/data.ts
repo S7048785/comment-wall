@@ -1,33 +1,35 @@
-import { Label, imgLabel } from "@/types/enum/label";
 import { type ImgCard, type MsgCard } from "@/types/interface/card";
 import { type UserComment } from "@/types/interface/user";
 // 卡片标签列表
-export const cardLabelList: Label[] = [
-  Label.ALL,
-  Label.TARGET,
-  Label.IDEAL,
-  Label.PAST,
-  Label.FUTURE,
-  Label.LOVE,
-  Label.LOVELETTER,
-  Label.FRIEND,
-  Label.SECRET,
-  Label.ABSTRUCT,
-  Label.OTHER,
+export const msgLabel: string[] = [
+  "全部",
+  "目标",
+  "理想",
+  "过去",
+  "未来",
+  "爱情",
+  "亲情",
+  "友情",
+  "秘密",
+  "抽象",
+  "其他",
 ];
+
 // 图像标签列表
-export const imgLabelList: imgLabel[] = [
-  imgLabel.ALL,
-  imgLabel.ANIME,
-  imgLabel.DESIGN,
-  imgLabel.ENTERTAINMENT,
-  imgLabel.OVERALL,
-  imgLabel.NATURAL,
-  imgLabel.SCENIC,
-  imgLabel.PERSON,
-  imgLabel.MECHANICAL,
-  imgLabel.CULTURE,
+export const imgLabel: string[] = [
+  "全部",
+  "动漫",
+  "设计",
+  "娱乐",
+  "综合",
+  "自然",
+  "景点",
+  "人物",
+  "机械",
+  "文化",
+  "其他",
 ];
+
 // 卡片颜色列表
 export const cardColorList = [
   "#fcafa24d",
@@ -50,7 +52,7 @@ export const cardNormal: MsgCard = {
   type: "msg",
   commentCount: 0,
   color: cardColorList[0],
-  label: cardLabelList[1],
+  label: msgLabel[0],
 };
 ("https://picsum.photos/id/800/900");
 // 评论列表
@@ -176,7 +178,7 @@ export const userComments: UserComment[] = [
 export let imageCardList: ImgCard[] = [
   {
     id: "198",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     liked: false,
     commentCount: 4,
@@ -185,7 +187,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "735",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 2,
     type: "img",
@@ -194,7 +196,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "996",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 3,
     type: "img",
@@ -203,7 +205,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "101",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 2,
     type: "img",
@@ -212,7 +214,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "255",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 1,
     type: "img",
@@ -221,7 +223,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "344",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 5,
     type: "img",
@@ -230,7 +232,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "804",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 4,
     type: "img",
@@ -239,7 +241,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "460",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 2,
     type: "img",
@@ -248,7 +250,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "928",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 1,
     type: "img",
@@ -257,7 +259,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "51",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 2,
     type: "img",
@@ -266,7 +268,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "646",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 3,
     type: "img",
@@ -275,7 +277,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "879",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 4,
     type: "img",
@@ -284,7 +286,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "144",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 5,
     type: "img",
@@ -293,7 +295,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "810",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 6,
     type: "img",
@@ -302,7 +304,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "287",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 7,
     type: "img",
@@ -311,7 +313,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "863",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 8,
     type: "img",
@@ -320,7 +322,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "334",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 1,
     type: "img",
@@ -329,7 +331,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "335",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 21,
     type: "img",
@@ -338,7 +340,7 @@ export let imageCardList: ImgCard[] = [
   },
   {
     id: "336",
-    label: "动漫",
+    label: msgLabel[0],
     likeCount: 0,
     commentCount: 13,
     type: "img",

@@ -32,7 +32,7 @@ public class Comment implements Serializable {
     private String content; // 评论内容
     
     @TableField("category")
-    private Integer category;
+    private Integer category; // 分类 1留言 2图片
 
     @TableField("create_time")
     private LocalDateTime createTime; // 创建时间

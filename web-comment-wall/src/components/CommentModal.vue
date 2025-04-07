@@ -81,7 +81,7 @@
               size="large"
             >
               <el-radio-button
-                v-for="(label, index) in cardLabelList.slice(1)"
+                v-for="(label, index) in msgLabel.slice(1)"
                 :key="label"
                 :value="label"
                 :label="label"
@@ -101,6 +101,7 @@
           class="comment-area"
           ref="commentArea"
           @mousedown.stop
+          @keydown="enterComment"
           v-click-outside="() => (commentFootShow = false)"
         >
           <div class="body">
@@ -127,16 +128,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import emitter from "@/utils/emitter";
 import { type ImgCard, type MsgCard } from "@/types/interface/card";
 import {
   cardColorList,
-  cardLabelList,
+  msgLabel,
   cardNormal,
   userComments as uc,
 } from "@/utils/data";
-import { useCardStore } from "@/stores/card";
+import { useCardStore } from "@/stores/cardStore";
 import CommentContent from "./CommentContent.vue";
 import { ElMessage } from "element-plus";
 import { type UserComment } from "@/types/interface/user";
@@ -148,12 +149,14 @@ const { card, top = 0 } = defineProps<{
   card: ImgCard | MsgCard;
   top?: number;
 }>();
+
 const emit = defineEmits<{
   comment: [cardId: string];
+  publish: [card: ImgCard | MsgCard];
 }>();
 
 // 当前卡片数据
-const currentOption = ref({ ...card });
+const currentOption: any = ref({ ...card });
 // 监听父组件传递的卡片数据变化，更新当前卡片数据
 watch(
   () => card,
@@ -210,6 +213,7 @@ function discard() {
 function publish() {
   // 校验留言板是否为空值
   const temp = currentOption.value as MsgCard;
+
   if (temp.content === "" || temp.username === "") {
     ElMessage({
       message: "留言内容或签名不能为空",
@@ -230,10 +234,29 @@ function publish() {
   }
 
   // TODO: 发布留言 请求
+
+  (currentOption.value.content as string).replace(/\n/g, "<br>");
+  // 善后操作
+  ElMessage({
+    message: "发布成功",
+    type: "success",
+    plain: true,
+  });
+  currentOption.value.id = `${Date.now()}`;
+  emit("publish", currentOption.value);
+  console.log(currentOption.value);
+
+  discard();
 }
 
 // 留言评论
 const commentMsg = ref("");
+function enterComment(event: KeyboardEvent) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    comment(card.id);
+  }
+}
 // 发送评论
 function comment(cardId: string) {
   // 判断空值
@@ -257,7 +280,6 @@ function comment(cardId: string) {
     content: msg,
     date: new Date().toLocaleString(),
   });
-  console.log(userCommentList.value);
 
   // 善后操作
   ElMessage({
@@ -272,8 +294,11 @@ function comment(cardId: string) {
 }
 
 onMounted(() => {
-  emitter.on("commentFocus", () => {
-    commentInput.value.focus();
+  emitter.on("commentFocus", (card) => {
+    emitter.emit("modal-toggle", card);
+    nextTick(() => {
+      commentInput.value.focus();
+    });
   });
   // currentOption.value = { ...card };
 });

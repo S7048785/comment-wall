@@ -10,9 +10,15 @@ import comment.wall.constant.CommentConstant;
 import comment.wall.dto.CommentDTO;
 import comment.wall.dto.CommentPageQueryDTO;
 import comment.wall.exception.CommentErrorException;
+import comment.wall.mapper.CardImageMapper;
+import comment.wall.mapper.CardMessageMapper;
 import comment.wall.mapper.CommentMapper;
+import comment.wall.po.CardImage;
+import comment.wall.po.CardMessage;
 import comment.wall.po.Comment;
 import comment.wall.result.PageResult;
+import comment.wall.service.ICardImageService;
+import comment.wall.service.ICardMessageService;
 import comment.wall.service.ICommentService;
 import comment.wall.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +32,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 	
 	@Autowired
 	private CommentMapper commentMapper;
+	@Autowired
+	private CardMessageMapper cardMessageMapper;
+	@Autowired
+	private CardImageMapper cardImageMapper;
+	
 	/**
 	 * 根据卡片id获取评论
 	 * @return
@@ -94,6 +105,20 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 				                .createTime(LocalDateTime.now())
 				                .build();
 		save(build);
+		// 评论数+1
+		if (CommentConstant.CARD_MESSAGE.equals(commentDTO.getCategory())) {
+			cardMessageMapper.update(
+					new LambdaUpdateWrapper<CardMessage>()
+							.eq(CardMessage::getId, commentDTO.getCardId())
+							.setSql("comment_count = comment_count + 1")
+			);
+		} else if(CommentConstant.CARD_IMAGE.equals(commentDTO.getCategory())) {
+			cardImageMapper.update(
+					new LambdaUpdateWrapper<CardImage>()
+							.eq(CardImage::getId, commentDTO.getCardId())
+							.setSql("comment_count = comment_count + 1")
+			);
+		}
 	}
 	
 }

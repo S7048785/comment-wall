@@ -2,7 +2,9 @@
 import { RouterView } from "vue-router";
 import { api1 } from "@/api/test";
 import emitter from "@/utils/emitter";
-
+import { useCardStore } from "@/stores/cardStore";
+// 初始化留言卡片
+useCardStore().getCartMsgList();
 </script>
 
 <template>

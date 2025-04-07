@@ -5,7 +5,7 @@
     <div class="label-list">
       <el-radio-group v-model="currentLabel" size="large">
         <el-radio-button
-          v-for="item in imgLabelList"
+          v-for="item in imgLabel"
           :key="item"
           :value="item"
           :label="item"
@@ -17,13 +17,13 @@
       <div class="container">
         <div
           class="item"
-          @mousedown.left.stop="ViewToggle(item)"
+          @mouseup.left.stop="ViewToggle(item)"
           v-for="(item, index) in imageCardListReactive"
           :key="item.id"
         >
           <img :src="item.url" alt="" />
           <div class="bg">
-            <div class="liked" @mousedown.stop @click="toggleLiked(item)">
+            <div class="liked" @mouseup.stop @click="toggleLiked(item)">
               <Heart v-model="item.liked" />
               <span class="count">{{ item.likeCount }}</span>
             </div>
@@ -45,17 +45,21 @@ import { ref, reactive, onMounted, onUnmounted, watch } from "vue";
 import emitter from "@/utils/emitter";
 import ImageViewer from "./components/ImageViewer.vue";
 import { type ImgCard } from "@/types/interface/card";
-import { imgLabelList, imageCardList } from "@/utils/data";
-import { useCardStore } from "@/stores/card";
+import { imgLabel, imageCardList } from "@/utils/data";
+import { useCardStore } from "@/stores/cardStore";
 const imageCardListReactive = reactive<ImgCard[]>(imageCardList);
-const currentLabel = ref(imgLabelList[0]);
+const currentLabel = ref(imgLabel[0]);
 
 // 点击喜欢按钮时触发的事件
 async function toggleLiked(imageCard: ImgCard) {
   imageCardListReactive.find((item: ImgCard) => {
     if (item.id === imageCard.id) {
-      imageCard.liked = !imageCard.liked;
-      imageCard.likeCount += imageCard.liked === true ? 1 : -1;
+      item.liked = !item.liked;
+      item.likeCount += item.liked === true ? 1 : -1;
+      imageCard.liked = item.liked;
+      imageCard.likeCount = item.likeCount;
+      // console.log(imageCard);
+
       // TODO: 发送喜欢事件
     }
   });

@@ -5,56 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5436ccaf-9814-4130-89bf-dca762337c1c" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/CommentConstant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/FieldConstant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/exception/CommentErrorException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CommentPageQueryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/MybatisPlusConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/WebMvcConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardImageMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CommentMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/test/java/comment/wall/CommentTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/MessageConstant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/PageResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/PageResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/result/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardImageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardImageDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardMessageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardMessageDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/CommentConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/CommentConstant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CommentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CommentDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/LabelDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/LabelDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/CardMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardImageVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardImageVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardMessageVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CardMessageVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CommentVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/CommentVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/LabelVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/vo/LabelVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardMessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CardMessageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/handler/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardImageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardImageMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardMessageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CardMessageMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/mapper/CommentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICardMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ICommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardImageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardMessageServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CommentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardMessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardMessageMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentContent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/card.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/utils/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-image/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-image/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-image/components/ImageViewer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-image/components/ImageViewer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/components/NoteCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/components/NoteCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +101,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CommentTests.testGetComment">
+  <component name="RunManager" selected="Spring Boot.Application">
     <configuration default="true" type="FlutterRunConfigurationType" factoryName="Flutter" editBeforeRun="true">
       <method v="2" />
     </configuration>
@@ -186,6 +155,8 @@
       <workItem from="1743840997781" duration="1603000" />
       <workItem from="1743842620577" duration="18914000" />
       <workItem from="1743918465429" duration="3085000" />
+      <workItem from="1744002658743" duration="4816000" />
+      <workItem from="1744015944866" duration="5750000" />
     </task>
     <servers />
   </component>
