@@ -37,10 +37,11 @@ public class CommentController {
 	 */
 	@Operation(summary = "创建评论")
 	@PostMapping
-	public Result createComment(@RequestBody CommentDTO commentDTO) {
+	public Result<CommentVO> createComment(@RequestBody CommentDTO commentDTO) {
 		log.info("创建评论:{}", commentDTO);
-		commentService.createComment(commentDTO);
-		return Result.success();
+		Long commentId = commentService.createComment(commentDTO);
+		
+		return Result.success(commentService.getCommentById(commentId, commentDTO.getCategory()));
 	}
 	
 	/**

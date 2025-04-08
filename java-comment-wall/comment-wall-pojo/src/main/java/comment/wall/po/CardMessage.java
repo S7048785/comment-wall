@@ -18,28 +18,31 @@ import java.time.LocalDateTime;
 public class CardMessage {
     @TableId(type = IdType.AUTO)
     private Long id; // 主键ID，自增
-
+    
     @TableField("user_id")
     private Long userId; // 用户ID
-
+    
     @TableField("color")
     private String color; // 卡片颜色
-
+    
     @TableField("content")
     private String content; // 卡片内容
-
+    
     @TableField("label_id")
     private Integer labelId; // 标签ID
-
+    
     @TableField("like_count")
     private Integer likeCount; // 点赞数
-
+    
     @TableField("comment_count")
     private Integer commentCount; // 评论数
-
+    
     @TableField("create_time")
     private LocalDateTime createTime; // 创建时间
     
     @TableField("update_time")
     private LocalDateTime updateTime; // 更新时间
+    
+    @TableField("deleted")
+    private Boolean deleted;
 }

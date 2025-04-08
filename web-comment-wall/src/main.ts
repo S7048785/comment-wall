@@ -6,7 +6,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
-import { clickOutside } from "@/directive";
+import { clickOutside, lazyPlugin } from "@/directive";
 
 import App from "./App.vue";
 import router from "./router";
@@ -19,5 +19,6 @@ app.use(ElementPlus);
 
 // 绑定自定义指令
 app.use(clickOutside);
+app.use(lazyPlugin);
 
 app.mount("#app");

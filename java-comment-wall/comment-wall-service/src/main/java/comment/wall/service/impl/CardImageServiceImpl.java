@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import comment.wall.constant.CardConstant;
+import comment.wall.context.BaseContext;
 import comment.wall.dto.CardImageDTO;
 import comment.wall.dto.CardPageQueryDTO;
 import comment.wall.exception.CardErrorException;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CardImageServiceImpl extends ServiceImpl<CardImageMapper, CardImage> implements ICardImageService {
@@ -36,7 +38,7 @@ public class CardImageServiceImpl extends ServiceImpl<CardImageMapper, CardImage
 	public CardImageVO getCardById(String cardId) {
 		CardImageVO card = cardImageMapper.queryCardById(cardId);
 		if (card == null) {
-			throw new CardErrorException(CardConstant.CARD_MESSAGE_NOT_EXIST);
+			throw new CardErrorException(CardConstant.CARD_NOT_EXIST);
 		}
 		return card;
 	}
@@ -61,9 +63,16 @@ public class CardImageServiceImpl extends ServiceImpl<CardImageMapper, CardImage
 	 */
 	@Override
 	public Boolean updateCard(CardImageDTO card) {
-		// TODO: 修改前验证当前卡片是否属于当前用户
-		CardImage cardImage = BeanUtil.copyProperties(card, CardImage.class);
-		return updateById(cardImage);
+		Long currentId = BaseContext.getCurrentId();
+		CardImage card1 = getById(card.getId());
+		if (card1 == null)
+			throw new CardErrorException(CardConstant.CARD_NOT_EXIST);
+		// 当前卡片是否属于当前用户
+		if (card1.getId().equals(card.getId()) && card1.getUserId().equals(currentId)) {
+			CardImage cardImage = BeanUtil.copyProperties(card, CardImage.class);
+			return updateById(cardImage);
+		}
+		return false;
 	}
 	
 	/**
@@ -72,8 +81,6 @@ public class CardImageServiceImpl extends ServiceImpl<CardImageMapper, CardImage
 	 */
 	@Override
 	public void createCard(CardImageDTO card) {
-		// TODO: 验证当前是否是当前用户
-		
 		// TODO: 查询标签是否存在
 		
 		CardImage build = CardImage.builder()

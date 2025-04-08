@@ -1,12 +1,9 @@
 import request from "@/utils/request";
+import { msgLabel, imgLabel } from "@/utils/data";
 import { type MsgCard, type ImgCard } from "@/types/interface/card";
 
 /**
  *  分页查询留言卡片列表
- * @param page 页码
- * @param size 每页数量
- * @param label 标签
- * @returns
  */
 export const getCardMsgListAPI = (
   page?: number,
@@ -23,6 +20,13 @@ export const getCardMsgListAPI = (
   });
 };
 
+// 根据id查询留言卡片
+export const getCardMsgByIdAPI = (id: number) => {
+  return request({
+    url: `/card-message/${id}`,
+  });
+};
+
 /**
  * 新增留言卡片
  */
@@ -31,10 +35,47 @@ export const addCardMsgAPI = (card: MsgCard) => {
     url: "/card-message",
     method: "post",
     data: {
-      userId: card.username,
       content: card.content,
       color: card.color,
-      label: card.label,
+      labelId: msgLabel.indexOf(card.label),
+    },
+  });
+};
+
+// 修改留言卡片
+export const updateCardMsgAPI = (card: MsgCard) => {
+  return request({
+    url: "/card-message",
+    method: "put",
+    data: {
+      id: card.id,
+      content: card.content,
+      color: card.color,
+      labelId: msgLabel.indexOf(card.label),
+    },
+  });
+};
+
+// 删除留言卡片
+export const deleteCardMsgAPI = (id: number) => {
+  return request({
+    url: `/card-message/${id}`,
+    method: "delete",
+  });
+};
+
+// 分页查询图片卡片列表
+export const getCardImgListAPI = (
+  page?: number,
+  size?: number,
+  label?: number
+) => {
+  return request({
+    url: "/card-image/page",
+    params: {
+      page,
+      size,
+      label,
     },
   });
 };

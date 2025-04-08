@@ -51,7 +51,7 @@ public class CardImageController {
 	public Result<CardImageVO> updateCardMessage(@RequestBody CardImageDTO card) {
 		if (!cardImageService.updateCard(card)) {
 			// 修改失败
-			return Result.error(CardConstant.CARD_MESSAGE_NOT_EXIST);
+			return Result.error(CardConstant.CARD_NOT_EXIST);
 		}
 		return Result.success();
 	}
@@ -76,7 +76,7 @@ public class CardImageController {
 	public Result<CardImageVO> deleteCardMessage(@PathVariable("id") Long cardId) {
 		if (!cardImageService.deleteCard(FieldConstant.CATEGORY_IMAGE, cardId)) {
 			// 删除失败
-			return Result.error(CardConstant.CARD_MESSAGE_NOT_EXIST);
+			return Result.error(CardConstant.CARD_NOT_EXIST);
 		}
 		return Result.success();
 	}

@@ -12,7 +12,7 @@ import java.util.List;
 public interface CardMessageMapper extends BaseMapper<CardMessage> {
 	
 	
-	CardMessageVO getByCardId(String cardId);
+	CardMessageVO getByCardId(Long cardId);
 	
-	List<CardMessageVO> pageQueryCard(Integer page, Integer pageSize, Integer labelId);
+	List<CardMessageVO> pageQueryCard(Integer page, Integer pageSize, Integer labelId, Long userId);
 }

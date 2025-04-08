@@ -37,7 +37,7 @@ public class CardMessageController {
 	 */
 	@Operation(summary = "根据id获取留言卡片信息")
 	@GetMapping("{id}")
-	public Result<CardMessageVO> getCardMessage(@PathVariable("id") String cardId) {
+	public Result<CardMessageVO> getCardMessage(@PathVariable("id") Long cardId) {
 		return Result.success(cardMessageService.getCardById(cardId));
 	}
 	
@@ -59,7 +59,7 @@ public class CardMessageController {
 	public Result<CardMessageVO> updateCardMessage(@RequestBody CardMessageDTO card) {
 		if (!cardMessageService.updateCard(card)) {
 			// 修改失败
-			return Result.error(CardConstant.CARD_MESSAGE_NOT_EXIST);
+			return Result.error(CardConstant.CARD_NOT_EXIST);
 		}
 		return Result.success();
 	}
@@ -69,9 +69,8 @@ public class CardMessageController {
 	 */
 	@Operation(summary = "创建留言卡片信息")
 	@PostMapping
-	public Result createCardMessage(@RequestBody CardMessageDTO card) {
-		cardMessageService.createCard(card);
-		return Result.success();
+	public Result<CardMessageVO> createCardMessage(@RequestBody CardMessageDTO card) {
+		return Result.success(cardMessageService.createCard(card));
 	}
 	
 	/**
@@ -79,10 +78,11 @@ public class CardMessageController {
 	 */
 	@Operation(summary = "删除留言卡片信息")
 	@DeleteMapping("/{id}")
-	public Result<CardMessageVO> deleteCardMessage(@PathVariable("id") String cardId) {
-		if (!cardMessageService.removeById(cardId)) {
+	public Result<CardMessageVO> deleteCardMessage(@PathVariable("id") Long cardId) {
+		Boolean b = cardMessageService.deleteCard(cardId);
+		if (!b) {
 			// 删除失败
-			return Result.error(CardConstant.CARD_MESSAGE_NOT_EXIST);
+			return Result.error(CardConstant.CARD_NOT_EXIST);
 		}
 		return Result.success();
 	}

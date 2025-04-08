@@ -10,11 +10,13 @@ import java.util.List;
 
 public interface ICardMessageService extends IService<CardMessage> {
 	
-	CardMessageVO getCardById(String cardId);
+	CardMessageVO getCardById(Long cardId);
 	
 	List<CardMessageVO> getCardMessagePage(CardPageQueryDTO cardPageQueryDTO);
 	
 	Boolean updateCard(CardMessageDTO card);
 	
-	void createCard(CardMessageDTO card);
+	CardMessageVO createCard(CardMessageDTO card);
+	
+	Boolean deleteCard(Long cardId);
 }

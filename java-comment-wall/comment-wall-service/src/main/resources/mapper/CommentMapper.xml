@@ -10,8 +10,19 @@
             comment.create_time
         from comment
                  left join user on comment.user_id = user.id
-        where comment.card_id = #{cardId} and comment.category = #{category}
+        where comment.deleted = 0 and comment.card_id = #{cardId} and comment.category = #{category}
         limit #{page}, #{pageSize}
+    </select>
+    <select id="getCommentById" resultType="comment.wall.vo.CommentVO">
+        select
+            comment.id,
+            user.name as user_name,
+            user.avatar_url as avatar,
+            comment.content,
+            comment.create_time
+        from comment
+                 left join user on comment.user_id = user.id
+        where comment.deleted = 0 and comment.id = #{id} and comment.category = #{category}
     </select>
 
 </mapper>

@@ -1,28 +1,91 @@
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
-import { ElMessage } from "element-plus";
-import { getCardMsgListAPI } from "@/api/card";
+import {
+  addCardMsgAPI,
+  deleteCardMsgAPI,
+  getCardImgListAPI,
+  getCardMsgByIdAPI,
+  getCardMsgListAPI,
+  updateCardMsgAPI,
+} from "@/api/card";
 import { type MsgCard, type ImgCard } from "@/types/interface/card";
 import { cardColorList, msgLabel, imgLabel } from "@/utils/data";
 
 export const useCardStore = defineStore("card", () => {
-  /* state */
+  // 留言卡片
   const cardMsgList = ref<MsgCard[]>([]);
-  // 分页查询
-  const page = ref(1);
-  const size = ref(15);
+  // 分页条件
+  const msgPage = ref(1);
+  const msgSize = ref(15);
   const isNone = ref(false);
+  // 留言卡片分页查询
   async function getCartMsgList(label?: number) {
     if (isNone.value) {
       return;
     }
-    const res: any = await getCardMsgListAPI(page.value, size.value, label);
+    const res: any = await getCardMsgListAPI(
+      msgPage.value,
+      msgSize.value,
+      label
+    );
     cardMsgList.value.push(...res.records);
-    page.value += 1;
-    if (res.total < size.value) {
+    msgPage.value += 1;
+    if (res.total < msgSize.value) {
       isNone.value = true;
     }
   }
+  // id查询卡片
+  async function getCartMsgById(id: number) {
+    const res: any = await getCardMsgByIdAPI(id);
+    currentMsgCard.value = res;
+  }
+
+  // 添加留言卡片
+  async function addCardMsg(card: MsgCard) {
+    const res: any = await addCardMsgAPI(card);
+    console.log(res.data);
+
+    cardMsgList.value.unshift(res.data as MsgCard);
+    console.log(cardMsgList.value);
+  }
+
+  // 修改留言卡片
+  async function updateCardMsg(card: MsgCard) {
+    const res: any = await updateCardMsgAPI(card);
+    // 修改成功
+    if (res.code === 1) {
+      cardMsgList.value = cardMsgList.value.map((item) => {
+        if (item.id === card.id) {
+          return card;
+        }
+        return item;
+      });
+    }
+  }
+
+  // 删除留言
+  async function deleteCardMsg(id: number) {
+    const res: any = await deleteCardMsgAPI(id);
+    // 删除成功
+    if (res.code === 1) {
+      cardMsgList.value = cardMsgList.value.filter((item) => {
+        return item.id !== id.toString();
+      });
+    }
+  }
+
+  // 图片卡片
+  const cardImgList = ref<ImgCard[]>([]);
+  // 图片卡片分页查询
+  async function getCartImgList(label?: number) {
+    const res: any = await getCardImgListAPI(
+      msgPage.value,
+      msgSize.value,
+      label
+    );
+    cardImgList.value.push(...res.records);
+  }
+
   const currentMsgCard = ref<MsgCard>({
     id: "",
     date: "2025.04.01",
@@ -54,12 +117,17 @@ export const useCardStore = defineStore("card", () => {
   }
 
   return {
-    cardColorList,
     cardMsgList,
+    cardImgList,
     currentMsgCard,
     currentImgCard,
     setCurrentMsgCard,
     setCurrentImgCard,
     getCartMsgList,
+    getCartImgList,
+    getCartMsgById,
+    addCardMsg,
+    updateCardMsg,
+    deleteCardMsg,
   };
 });

@@ -35,7 +35,9 @@
             <if test="labelId != null">
                 label.id = #{labelId}
             </if>
+        and cm.deleted = 0
         </where>
+        order by cm.user_id = #{userId} desc, cm.id
         limit #{page}, #{pageSize}
     </select>
 </mapper>

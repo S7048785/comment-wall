@@ -28,6 +28,6 @@ public class User {
 	@TableField("avatar_url")
 	private String avatarUrl;
 
-    @TableField("create_time")
-    private LocalDateTime createTime; // 创建时间
+    @TableField("create_date")
+    private LocalDateTime createDate; // 创建时间
 }

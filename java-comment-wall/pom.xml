@@ -20,11 +20,11 @@
   </modules>
     <properties>
         <mybatis.plus.version>3.5.7</mybatis.plus.version>
-        <org.projectlombok.version>1.18.20</org.projectlombok.version>
-        <lombok.version>1.18.20</lombok.version>
-        <knife4j>4.4.0</knife4j>
+        <knife4j.version>4.4.0</knife4j.version>
         <mysql.version>8.0.32</mysql.version>
-        <hutool>5.8.20</hutool>
+        <hutool.version>5.8.11</hutool.version>
+        <jjwt>0.9.1</jjwt>
+        <lombok.version>1.18.24</lombok.version>
     </properties>
   <dependencies>
       <!-- mysql -->
@@ -44,24 +44,63 @@
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.24</version>
+        <version>${lombok.version}</version>
     </dependency>
       <!--Hutool工具包-->
       <dependency>
           <groupId>cn.hutool</groupId>
           <artifactId>hutool-all</artifactId>
-          <version>5.8.11</version>
+          <version>${hutool.version}</version>
       </dependency>
       <dependency>
           <groupId>com.github.xiaoymin</groupId>
           <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-          <version>${knife4j}</version>
+          <version>${knife4j.version}</version>
       </dependency>
+      <!-- Maven -->
       <dependency>
           <groupId>org.springdoc</groupId>
-          <artifactId>springdoc-openapi-ui</artifactId>
-          <version>1.6.14</version>
+          <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+          <version>2.3.0</version>
       </dependency>
+
+
+
+      <!-- JWT API -->
+      <dependency>
+          <groupId>io.jsonwebtoken</groupId>
+          <artifactId>jjwt-api</artifactId>
+          <version>0.12.6</version>
+      </dependency>
+
+      <!-- JWT 实现 -->
+      <dependency>
+          <groupId>io.jsonwebtoken</groupId>
+          <artifactId>jjwt-impl</artifactId>
+          <version>0.12.6</version>
+          <scope>runtime</scope>
+      </dependency>
+      <!-- Jackson 支持 (JSON 序列化/反序列化) -->
+      <dependency>
+          <groupId>io.jsonwebtoken</groupId>
+          <artifactId>jjwt-jackson</artifactId>
+          <version>0.12.6</version>
+          <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>com.fasterxml.jackson.datatype</groupId>
+          <artifactId>jackson-datatype-jsr310</artifactId>
+          <version>2.15.2</version> <!-- 确保版本与 jackson-databind 一致 -->
+      </dependency>
+
+
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.15.2</version> <!-- 确保版本兼容 -->
+      </dependency>
+
 </dependencies>
 
 </project>

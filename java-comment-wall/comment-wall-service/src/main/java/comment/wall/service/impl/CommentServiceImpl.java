@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import comment.wall.constant.CommentConstant;
+import comment.wall.context.BaseContext;
 import comment.wall.dto.CommentDTO;
 import comment.wall.dto.CommentPageQueryDTO;
 import comment.wall.exception.CommentErrorException;
@@ -23,6 +24,7 @@ import comment.wall.service.ICommentService;
 import comment.wall.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -56,8 +58,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 	 */
 	@Override
 	public Boolean deleteComment(Integer category, Long id) {
-		// TODO: 判断当前评论是否属于当前用户
-		
+		Long currentId = BaseContext.getCurrentId();
+		Comment comment = getById(id);
+		if (comment == null || comment.getUserId().equals(currentId)) {
+			return false;
+		}
 		// 标记为已删除
 		return update(
 				new LambdaUpdateWrapper<Comment>()
@@ -76,16 +81,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 	 * 创建评论
 	 * @param commentDTO
 	 */
+	@Transactional
 	@Override
-	public void createComment(CommentDTO commentDTO) {
-		// TODO: 校验当前userId是否是当前用户
-		
+	public Long createComment(CommentDTO commentDTO) {
+		Long currentId = BaseContext.getCurrentId();
 		if (StrUtil.isBlank(commentDTO.getContent())) {
 			throw new CommentErrorException(CommentConstant.COMMENT_MESSAGE);
 		}
-		
+		Long commentId = null;
 		// 查询被标记为deleted的评论
-		List<Comment> list = lambdaQuery().eq(Comment::getCardId, 2).list();
+		List<Comment> list = lambdaQuery().eq(Comment::getDeleted, true).list();
 		if (CollUtil.isNotEmpty(list)) {
 			Comment comment = list.get(0);
 			Comment comment1 = BeanUtil.copyProperties(commentDTO, Comment.class);
@@ -94,17 +99,19 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 			comment1.setCreateTime(LocalDateTime.now());
 			comment1.setDeleted(false);
 			updateById(comment1);
-			return;
+			commentId =  comment1.getId();
+		} else {
+			// 如果没有，则创建新评论
+			Comment build = Comment.builder()
+					                .cardId(commentDTO.getCardId())
+					                .userId(currentId)
+					                .content(commentDTO.getContent())
+					                .category(commentDTO.getCategory())
+					                .createTime(LocalDateTime.now())
+					                .build();
+			save(build);
+			commentId = build.getId();
 		}
-		// 如果没有，则创建新评论
-		Comment build = Comment.builder()
-				                .cardId(commentDTO.getCardId())
-				                .userId(commentDTO.getUserId())
-				                .content(commentDTO.getContent())
-				                .category(commentDTO.getCategory())
-				                .createTime(LocalDateTime.now())
-				                .build();
-		save(build);
 		// 评论数+1
 		if (CommentConstant.CARD_MESSAGE.equals(commentDTO.getCategory())) {
 			cardMessageMapper.update(
@@ -119,6 +126,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 							.setSql("comment_count = comment_count + 1")
 			);
 		}
+		return commentId;
 	}
+	
+	@Override
+	public CommentVO getCommentById(Long commentId, Integer category) {
+		return commentMapper.getCommentById(commentId, category);
+	}
+	
 	
 }

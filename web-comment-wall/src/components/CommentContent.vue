@@ -1,24 +1,33 @@
 <template>
   <div class="comment-content">
-    <div class="comment-content-box" v-for="(item, index) in comments">
+    <div
+      class="comment-content-box"
+      v-for="(item, index) in comments"
+      :key="item.id"
+    >
       <div class="left">
-        <div class="img" :style="`background-image: url('${item.img}')`"></div>
+        <div
+          class="img"
+          :style="`background-image: url('${item.avatar}')`"
+        ></div>
       </div>
       <div class="right">
         <div class="name">
-          <span>{{ item.name }}</span>
+          <span>{{ item.userName }}</span>
         </div>
         <div class="content">{{ item.content }}</div>
-        <div class="date">{{ item.date }}</div>
+        <div class="date">{{ item.createTime }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { type UserComment } from "@/types/interface/user";
+import { type CardComment } from "@/types/interface/comment";
+import { useCommentStore } from "@/stores/commentStore";
+import { useCardStore } from "@/stores/cardStore";
 const { comments } = defineProps<{
-  comments: UserComment[];
+  comments: CardComment[];
 }>();
 </script>
 
@@ -49,6 +58,7 @@ const { comments } = defineProps<{
       .img {
         width: 40px;
         height: 40px;
+        background-size: 40px 40px;
         border-radius: 50%;
       }
     }

@@ -12,5 +12,7 @@ public interface ICommentService extends IService<Comment> {
 	
 	Boolean deleteComment(Integer category, Long id);
 	
-	void createComment(CommentDTO commentDTO);
+	Long createComment(CommentDTO commentDTO);
+	
+	CommentVO getCommentById(Long commentId, Integer category);
 }

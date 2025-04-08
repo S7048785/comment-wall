@@ -12,16 +12,6 @@ const instance = axios.create({
 instance.interceptors.response.use(
   function (response) {
     // 拦截成功
-    if (
-      response.data.records[0] &&
-      typeof response.data.records[0].id === "number"
-    ) {
-      // 将id字段类型从number改为string
-      response.data.records.forEach((item: any) => {
-        item.id = item.id.toString();
-      });
-    }
-    console.log(response.data);
 
     return response.data;
   },
@@ -34,6 +24,7 @@ instance.interceptors.response.use(
 instance.interceptors.request.use(
   function (config) {
     // 请求之前做点事
+    config.headers.Authorization = localStorage.getItem("token");
     return config;
   },
   function (error) {

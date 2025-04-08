@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface CommentMapper extends BaseMapper<Comment> {
 	List<CommentVO> pageQueryComment(Integer page, Integer pageSize, Integer category, Long cardId);
+	
+	CommentVO getCommentById(Long id, Integer category);
 }

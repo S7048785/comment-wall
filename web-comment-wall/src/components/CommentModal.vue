@@ -1,5 +1,5 @@
 <template>
-  <transition name="modal-fade">
+  <transition name="modal-fade" v-show="isModalOpen">
     <div
       :style="{ top: `${top}%`, height: `${100 - top}vh` }"
       class="comment-modal"
@@ -117,7 +117,12 @@
         </div>
       </div>
       <div class="contents" v-show="currentOption.id !== ''">
-        <CommentContent :comments="userCommentList" />
+        <CommentContent
+          :comments="commentStore.commentList"
+          v-infinite-scroll="updateComment"
+          :infinite-scroll-disabled="commentStore.isNone"
+          :infinite-scroll-immediate="false"
+        />
       </div>
       <div class="comment-btn" v-show="currentOption.id === ''">
         <el-button class="discard" round @click="discard">丢弃</el-button>
@@ -131,20 +136,16 @@
 import { nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import emitter from "@/utils/emitter";
 import { type ImgCard, type MsgCard } from "@/types/interface/card";
-import {
-  cardColorList,
-  msgLabel,
-  cardNormal,
-  userComments as uc,
-} from "@/utils/data";
+import { cardColorList, msgLabel, cardNormal } from "@/utils/data";
 import { useCardStore } from "@/stores/cardStore";
+import { useCommentStore } from "@/stores/commentStore";
 import CommentContent from "./CommentContent.vue";
 import { ElMessage } from "element-plus";
 import { type UserComment } from "@/types/interface/user";
-// 评论数据
-const userCommentList = ref<UserComment[]>(uc);
 
 const cardStore = useCardStore();
+const commentStore = useCommentStore();
+const isModalOpen = defineModel();
 const { card, top = 0 } = defineProps<{
   card: ImgCard | MsgCard;
   top?: number;
@@ -155,13 +156,31 @@ const emit = defineEmits<{
   publish: [card: ImgCard | MsgCard];
 }>();
 
+// 更新评论
+const updateComment = () => {
+  console.log(commentStore.isNone);
+
+  commentStore.getCommentList(
+    currentOption.value.id,
+    currentOption.value.type === "msg" ? 1 : 2
+  );
+};
+
 // 当前卡片数据
 const currentOption: any = ref({ ...card });
 // 监听父组件传递的卡片数据变化，更新当前卡片数据
 watch(
   () => card,
-  (newVal) => {
+  (newVal, oldVal) => {
     currentOption.value = { ...newVal };
+    if (newVal.id !== oldVal.id) {
+      // 刷新评论区
+      commentStore.getCommentList(
+        newVal.id,
+        newVal.type === "msg" ? 1 : 2,
+        true
+      );
+    }
   }
 );
 // 监听当前卡片数据变化，更新store
@@ -173,6 +192,7 @@ watch(
       if (newVal.type === "msg") {
         cardStore.setCurrentMsgCard({ ...newVal });
       }
+    } else {
     }
     if (newVal.type === "img") {
       cardStore.setCurrentImgCard({ ...newVal });
@@ -233,8 +253,8 @@ function publish() {
     return;
   }
 
-  // TODO: 发布留言 请求
-
+  // 发布留言 请求
+  cardStore.addCardMsg(temp);
   (currentOption.value.content as string).replace(/\n/g, "<br>");
   // 善后操作
   ElMessage({
@@ -242,10 +262,6 @@ function publish() {
     type: "success",
     plain: true,
   });
-  currentOption.value.id = `${Date.now()}`;
-  emit("publish", currentOption.value);
-  console.log(currentOption.value);
-
   discard();
 }
 
@@ -271,15 +287,7 @@ function comment(cardId: string) {
   }
 
   // TODO: 发送评论请求 返回用户当前评论
-
-  // 更新数组
-  userCommentList.value.unshift({
-    id: `${Date.now()}`,
-    img: "https://fastly.picsum.photos/id/379/40/40.jpg?hmac=lwSn1UyxHXRH5kA1301wSCaTS5P8tU7Ojq5cLsnAKis",
-    name: currentOption.value.username || "测试",
-    content: msg,
-    date: new Date().toLocaleString(),
-  });
+  commentStore.addComment(cardId, msg, 1);
 
   // 善后操作
   ElMessage({

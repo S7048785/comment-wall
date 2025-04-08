@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 public class CardMessageDTO {
 	@Schema(description = "留言卡片id")
 	private Long id;
-	@Schema(description = "用户id")
-	private Long userId;
 	@Schema(description = "留言内容")
 	private String content;
 	@Schema(description = "卡片颜色")

@@ -1,3 +1,5 @@
+import { useIntersectionObserver } from "@vueuse/core";
+
 // 点击外部 隐藏元素
 export const clickOutside = {
   install(app: any) {
@@ -19,6 +21,23 @@ export const clickOutside = {
         // 在全局移除点击事件监听
 
         document.removeEventListener("mouseup", el.EventLis);
+      },
+    });
+  },
+};
+
+// 懒加载
+export const lazyPlugin = {
+  install(app: any) {
+    app.directive("lazy", {
+      beforeUpdate: (el: any, binding: any) => {
+        const { stop } = useIntersectionObserver(el, ([event]) => {
+          if (event.isIntersecting) {
+            stop(); // 停止监听
+            // binding.value();
+            console.log(el);
+          }
+        });
       },
     });
   },
