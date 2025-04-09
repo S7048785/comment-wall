@@ -15,7 +15,7 @@ export const useCardStore = defineStore("card", () => {
   // 留言卡片
   const cardMsgList = ref<MsgCard[]>([]);
   // load
-  const isLoading = ref(false);
+  const isLoading = ref(true);
   // 缓存label
   const labelCache = ref(0);
   // 分页条件
@@ -52,7 +52,7 @@ export const useCardStore = defineStore("card", () => {
     labelCache.value = label;
   }
   // id查询卡片
-  async function getCartMsgById(id: number) {
+  async function getCardMsgById(id: number) {
     const res: any = await getCardMsgByIdAPI(id);
     currentMsgCard.value = res;
   }
@@ -94,7 +94,7 @@ export const useCardStore = defineStore("card", () => {
   // 图片卡片
   const cardImgList = ref<ImgCard[]>([]);
   // 图片卡片分页查询
-  async function getCartImgList(label?: number) {
+  async function getCardImgList(label?: number) {
     const res: any = await getCardImgListAPI(
       msgPage.value,
       msgSize.value,
@@ -139,11 +139,14 @@ export const useCardStore = defineStore("card", () => {
     currentMsgCard,
     currentImgCard,
     isLoading,
+    msgPage,
+    msgSize,
+    isNone,
     setCurrentMsgCard,
     setCurrentImgCard,
-    getCartMsgList: getCardMsgList,
-    getCartImgList,
-    getCartMsgById,
+    getCardMsgList,
+    getCardImgList,
+    getCardMsgById,
     addCardMsg,
     updateCardMsg,
     deleteCardMsg,

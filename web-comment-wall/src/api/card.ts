@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import { msgLabel, imgLabel } from "@/utils/data";
+import { msgLabel } from "@/utils/data";
 import { type MsgCard, type ImgCard } from "@/types/interface/card";
 
 /**

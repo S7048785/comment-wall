@@ -55,7 +55,6 @@ export const useCommentStore = defineStore("comment", () => {
     category: 1 | 2
   ) => {
     const res: any = await addCommentAPI(cardId, content, category);
-
     commentList.value.unshift(res.data);
   };
 

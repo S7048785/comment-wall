@@ -16,10 +16,12 @@
       </el-menu>
     </div>
     <div class="user">
-      <div class="user-head"></div>
+      <el-avatar :src="userStore.userInfo.avatar" class="user-head" />
       <div class="user-name"></div>
       <div class="user-menu">
-        <div class="login">登录</div>
+        <div class="login">
+          <a href="/login">登录</a>
+        </div>
         <div class="register">注册</div>
       </div>
     </div>
@@ -30,23 +32,11 @@
 import { ref, reactive } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
 import { ElMessage } from "element-plus";
-import { ro } from "element-plus/es/locales.mjs";
+const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
-const btn_click = ref(true);
-const btn_toggle = () => {
-  console.log(route.path);
-
-  btn_click.value = !btn_click.value;
-  router.push(btn_click.value ? "/wall-message" : "/wall-image");
-};
-const send = () =>
-  ElMessage({
-    message: "发送成功",
-    type: "success",
-    duration: 1000,
-  });
 </script>
 
 <style lang="less" scoped>
@@ -105,11 +95,7 @@ const send = () =>
     display: flex;
     justify-content: flex-end;
     .user-head {
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
       margin-right: 20px;
-      background-image: linear-gradient(180deg, #7be7ff 2%, #1e85e2);
     }
     .user-name {
     }

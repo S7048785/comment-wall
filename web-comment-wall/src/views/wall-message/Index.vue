@@ -3,18 +3,22 @@
     <div class="title">留言墙</div>
     <div class="slogan">很多事情值得记录，当然也值得回味</div>
     <div class="label-list">
-      <el-radio-group v-model="currentLabel" size="large">
+      <el-radio-group v-model="labelStore.currentLabel" size="large">
         <el-radio-button
           v-for="item in labelStore.labelList"
           :key="item.id"
           :value="item.name"
           :label="item.name"
-          @click="cardStore.getCartMsgList(item.id, true)"
+          @click="cardStore.getCardMsgList(item.id, true)"
         />
       </el-radio-group>
     </div>
-    <div class="card" v-infinite-scroll="cardStore.getCartMsgList">
-      <div class="container">
+    <div
+      class="card"
+      v-infinite-scroll="cardStore.getCardMsgList"
+      :infinite-scroll-disabled="cardStore.isNone"
+    >
+      <div class="container" v-show="!cardStore.isLoading">
         <NodeCard
           class="card-item"
           v-for="(item, index) in cardStore.cardMsgList"
@@ -28,6 +32,7 @@
       </div>
       <div
         class="loading"
+        v-show="cardStore.isLoading"
         infinite-scroll-distance="200"
         v-loading="cardStore.isLoading"
         element-loading-background="#eee"
@@ -58,18 +63,14 @@
 
 <script setup lang="ts">
 import NodeCard from "@/views/wall-message/components/NoteCard.vue";
-import { ref, reactive, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { type MsgCard } from "@/types/interface/card";
 import emitter from "@/utils/emitter";
-import { msgLabel, cardColorList } from "@/utils/data";
 import { useCardStore } from "@/stores/cardStore";
 import { useLabelStore } from "@/stores/labelStore";
-
 const labelStore = useLabelStore();
 labelStore.getLabelList(1);
 const cardStore = useCardStore();
-
-const currentLabel = ref(msgLabel[0]);
 let targetCard: any = ref<MsgCard>({
   ...(cardStore.currentMsgCard as MsgCard),
 });
@@ -152,6 +153,9 @@ onUnmounted(() => {
   // Your styles here
   // min-height: 700px;
   padding-top: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .title {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -200,33 +204,29 @@ onUnmounted(() => {
     }
   }
   .card {
-    // width: 90%;
-    // flex-wrap: wrap;
-    // height: 400px;
-    margin-block: 20px;
+    width: 80%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    min-height: 200px;
+    margin-block: 20px;
     .loading {
-      height: 400px;
+      width: 100px;
+      height: 300px;
 
       &.el-loading-parent--relative {
       }
     }
 
     .container {
-      width: 80%;
-      // min-height: 400px;
       column-count: 4;
       column-gap: 20px;
-
       .card-item {
         break-inside: avoid;
         margin-bottom: 10px;
       }
     }
 
-    @media (max-width: 1385px) {
+    @media (max-width: 1440px) {
       .container {
         column-count: 3;
       }

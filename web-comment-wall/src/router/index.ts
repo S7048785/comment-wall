@@ -12,10 +12,12 @@ const router = createRouter({
       children: [
         {
           path: "/wall-message",
+          name: "wall-message",
           component: () => import("@/views/wall-message/Index.vue"),
         },
         {
           path: "/wall-image",
+          name: "wall-image",
           component: () => import("@/views/wall-image/Index.vue"),
         },
       ],

@@ -37,14 +37,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRef, computed } from "vue";
-import { cardColorList, msgLabel } from "@/utils/data";
-
+import { reactive } from "vue";
+import { cardColorList } from "@/utils/data";
+import { useLabelStore } from "@/stores/labelStore";
+const labelStore = useLabelStore();
 const currentOption = reactive({
   name: "",
   message: "",
   color: cardColorList[0],
-  label: msgLabel[1],
+  label: labelStore.labelList[0],
 });
 </script>
 

@@ -13,6 +13,7 @@ import comment.wall.result.Result;
 import comment.wall.service.IUserService;
 import comment.wall.utils.JwtUtils;
 import comment.wall.vo.UserLoginVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 	
@@ -32,7 +34,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	private JwtProperties jwtProperties;
 	@Override
 	public Result<UserLoginVO> login(UserLoginDTO userLoginDTO) {
-		String name = userLoginDTO.getName();
+		log.info("用户登录：{}", userLoginDTO);
+		String name = userLoginDTO.getUsername();
 		String password = userLoginDTO.getPassword();
 		
 		// 校验用户名和密码

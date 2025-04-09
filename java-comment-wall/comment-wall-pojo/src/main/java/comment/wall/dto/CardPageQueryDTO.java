@@ -21,4 +21,5 @@ public class CardPageQueryDTO implements Serializable {
 	// 标签
 	@Schema(description = "标签")
 	private Integer labelId;
+	
 }

@@ -136,13 +136,12 @@
 import { nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import emitter from "@/utils/emitter";
 import { type ImgCard, type MsgCard } from "@/types/interface/card";
-import { cardColorList, msgLabel, cardNormal } from "@/utils/data";
+import { cardColorList, cardNormal } from "@/utils/data";
 import { useCardStore } from "@/stores/cardStore";
 import { useCommentStore } from "@/stores/commentStore";
 import CommentContent from "./CommentContent.vue";
 import { ElMessage } from "element-plus";
-import { type UserComment } from "@/types/interface/user";
-
+import { msgLabel } from "@/utils/data";
 const cardStore = useCardStore();
 const commentStore = useCommentStore();
 const isModalOpen = defineModel();
@@ -191,9 +190,6 @@ watch(
         cardStore.setCurrentMsgCard({ ...newVal });
       }
     } else {
-    }
-    if (newVal.type === "img") {
-      cardStore.setCurrentImgCard({ ...newVal });
     }
     if (newVal.id !== oldVal.id) {
       // 数据变化时，跳转到顶部
@@ -252,15 +248,15 @@ function publish() {
   }
 
   // 发布留言 请求
-  cardStore.addCardMsg(temp);
-  (currentOption.value.content as string).replace(/\n/g, "<br>");
-  // 善后操作
-  ElMessage({
-    message: "发布成功",
-    type: "success",
-    plain: true,
+  cardStore.addCardMsg(temp).then(() => {
+    ElMessage({
+      message: "发布成功",
+      type: "success",
+      plain: true,
+    });
+    (currentOption.value.content as string).replace(/\n/g, "<br>");
+    discard();
   });
-  discard();
 }
 
 // 留言评论
@@ -284,19 +280,13 @@ function comment(cardId: string) {
     return;
   }
 
-  // TODO: 发送评论请求 返回用户当前评论
-  commentStore.addComment(cardId, msg, 1);
-
-  // 善后操作
-  ElMessage({
-    message: "评论成功",
-    type: "success",
-    plain: true,
+  // 发送评论请求 返回用户当前评论
+  commentStore.addComment(cardId, msg, 1).then((res) => {
+    currentOption.value.commentCount++;
+    commentMsg.value = "";
+    // 评论数+1
+    emit("comment", cardId);
   });
-  currentOption.value.commentCount++;
-  commentMsg.value = "";
-  // 评论数+1
-  emit("comment", cardId);
 }
 
 onMounted(() => {

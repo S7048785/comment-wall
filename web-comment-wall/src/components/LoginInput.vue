@@ -60,7 +60,7 @@ function blur() {
     border-bottom: 2px #fff solid;
     display: block;
     width: 100%;
-    padding: 15px 0;
+    height: 40px;
     font-size: 18px;
     color: #000000;
     &:focus,
@@ -71,7 +71,8 @@ function blur() {
   }
   label {
     position: absolute;
-    top: 15px;
+    bottom: 0px;
+
     left: 0;
     pointer-events: none;
     &.is-focus {

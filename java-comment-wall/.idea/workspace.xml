@@ -4,26 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5436ccaf-9814-4130-89bf-dca762337c1c" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/constant/RedisConstant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-wall-service/src/test/java/comment/wall/RedisTests.java" afterDir="false" />
+    <list default="true" id="5436ccaf-9814-4130-89bf-dca762337c1c" name="更改" comment="feat(comment-wall): 实现评论区无限下拉和新增留言卡片功能&#10;&#10;- 在后端添加 Redis缓存支持，用于加速标签列表查询&#10;- 前端实现无限下拉加载功能，优化用户体验&#10;- 新增留言卡片组件，支持用户发表评论&#10;- 重构部分代码以支持新功能，包括标签相关接口和数据结构">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/utils/JwtUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/po/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/LabelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/LabelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ILabelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/ILabelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/CardMessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/LabelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/LabelServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/UserLoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/UserLoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardMessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/mapper/CardMessageMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-comment-wall/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/api/card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/api/card.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/api/login.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/cardStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/stores/cardStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/LoginInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/LoginInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/TopBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/TopBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/commentStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/stores/commentStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/userStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/stores/userStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/utils/request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-image/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-image/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/login/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,38 +59,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.CommentTests.testGetComment.executor": "Run",
-    "JUnit.LoginTests.login.executor": "Run",
-    "JUnit.RedisTests.testRedis.executor": "Run",
-    "Maven.java-comment-wall [clean].executor": "Run",
-    "Maven.java-comment-wall [compile].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.Application.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Code/Projects/CangQiong/sky-take-out",
-    "project.structure.last.edited": "Facet",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.CommentTests.testGetComment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginTests.login.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RedisTests.testRedis.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.java-comment-wall [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.java-comment-wall [compile].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Code/Projects/CangQiong/sky-take-out&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facet&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言": [
-      "MySQL"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="comment.wall" />
@@ -167,13 +164,24 @@
       <workItem from="1744084619423" duration="966000" />
       <workItem from="1744085599487" duration="24055000" />
       <workItem from="1744161170609" duration="6258000" />
-      <workItem from="1744175903286" duration="2892000" />
+      <workItem from="1744175903286" duration="7223000" />
+      <workItem from="1744193860484" duration="4969000" />
     </task>
+    <task id="LOCAL-00001" summary="feat(comment-wall): 实现评论区无限下拉和新增留言卡片功能&#10;&#10;- 在后端添加 Redis缓存支持，用于加速标签列表查询&#10;- 前端实现无限下拉加载功能，优化用户体验&#10;- 新增留言卡片组件，支持用户发表评论&#10;- 重构部分代码以支持新功能，包括标签相关接口和数据结构">
+      <option name="closed" value="true" />
+      <created>1744178818559</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744178818559</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="前后端联调&#10;&#10;实现：&#10;评论区无限下拉&#10;新增留言卡片" />
-    <option name="LAST_COMMIT_MESSAGE" value="前后端联调&#10;&#10;实现：&#10;评论区无限下拉&#10;新增留言卡片" />
+    <MESSAGE value="feat(comment-wall): 实现评论区无限下拉和新增留言卡片功能&#10;&#10;- 在后端添加 Redis缓存支持，用于加速标签列表查询&#10;- 前端实现无限下拉加载功能，优化用户体验&#10;- 新增留言卡片组件，支持用户发表评论&#10;- 重构部分代码以支持新功能，包括标签相关接口和数据结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(comment-wall): 实现评论区无限下拉和新增留言卡片功能&#10;&#10;- 在后端添加 Redis缓存支持，用于加速标签列表查询&#10;- 前端实现无限下拉加载功能，优化用户体验&#10;- 新增留言卡片组件，支持用户发表评论&#10;- 重构部分代码以支持新功能，包括标签相关接口和数据结构" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

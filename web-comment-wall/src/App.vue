@@ -2,10 +2,11 @@
 import { RouterView } from "vue-router";
 import TopBar from "@/components/TopBar.vue";
 import FootBar from "@/components/FootBar.vue";
+import HomeView from "./views/HomeView.vue";
 </script>
 
 <template>
-  <RouterView />
+  <HomeView />
 </template>
 
 <style lang="less">
