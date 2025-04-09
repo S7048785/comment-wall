@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import {
   addCardMsgAPI,
   deleteCardMsgAPI,
@@ -14,25 +14,42 @@ import { cardColorList, msgLabel, imgLabel } from "@/utils/data";
 export const useCardStore = defineStore("card", () => {
   // 留言卡片
   const cardMsgList = ref<MsgCard[]>([]);
+  // load
+  const isLoading = ref(false);
+  // 缓存label
+  const labelCache = ref(0);
   // 分页条件
   const msgPage = ref(1);
   const msgSize = ref(15);
   const isNone = ref(false);
   // 留言卡片分页查询
-  async function getCartMsgList(label?: number) {
+  async function getCardMsgList(label: number = 0, refresh: boolean = false) {
+    // 刷新留言
+    if (refresh) {
+      if (labelCache.value === label) {
+        return;
+      }
+      cardMsgList.value = [];
+      msgPage.value = 1;
+      isNone.value = false;
+    }
     if (isNone.value) {
+      isLoading.value = false;
       return;
     }
+    isLoading.value = true;
     const res: any = await getCardMsgListAPI(
       msgPage.value,
       msgSize.value,
       label
     );
+    isLoading.value = false;
     cardMsgList.value.push(...res.records);
     msgPage.value += 1;
     if (res.total < msgSize.value) {
       isNone.value = true;
     }
+    labelCache.value = label;
   }
   // id查询卡片
   async function getCartMsgById(id: number) {
@@ -121,9 +138,10 @@ export const useCardStore = defineStore("card", () => {
     cardImgList,
     currentMsgCard,
     currentImgCard,
+    isLoading,
     setCurrentMsgCard,
     setCurrentImgCard,
-    getCartMsgList,
+    getCartMsgList: getCardMsgList,
     getCartImgList,
     getCartMsgById,
     addCardMsg,

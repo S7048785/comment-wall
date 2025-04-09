@@ -5,10 +5,11 @@
     <div class="label-list">
       <el-radio-group v-model="currentLabel" size="large">
         <el-radio-button
-          v-for="item in msgLabel"
-          :key="item"
-          :value="item"
-          :label="item"
+          v-for="item in labelStore.labelList"
+          :key="item.id"
+          :value="item.name"
+          :label="item.name"
+          @click="cardStore.getCartMsgList(item.id, true)"
         />
       </el-radio-group>
     </div>
@@ -16,7 +17,7 @@
       <div class="container">
         <NodeCard
           class="card-item"
-          v-for="(item, index) in cardList"
+          v-for="(item, index) in cardStore.cardMsgList"
           :key="item.id"
           :card="item"
           :isActive="isModalOpen && targetCard.id === item.id"
@@ -25,6 +26,13 @@
           @mouseup.left.stop="modalToggle(item)"
         />
       </div>
+      <div
+        class="loading"
+        infinite-scroll-distance="200"
+        v-loading="cardStore.isLoading"
+        element-loading-background="#eee"
+        element-loading-text="Loading..."
+      ></div>
     </div>
     <div
       class="add"
@@ -55,6 +63,10 @@ import { type MsgCard } from "@/types/interface/card";
 import emitter from "@/utils/emitter";
 import { msgLabel, cardColorList } from "@/utils/data";
 import { useCardStore } from "@/stores/cardStore";
+import { useLabelStore } from "@/stores/labelStore";
+
+const labelStore = useLabelStore();
+labelStore.getLabelList(1);
 const cardStore = useCardStore();
 
 const currentLabel = ref(msgLabel[0]);
@@ -138,7 +150,7 @@ onUnmounted(() => {
 <style lang="less" scoped>
 .wall-message {
   // Your styles here
-  min-height: 700px;
+  // min-height: 700px;
   padding-top: 52px;
   .title {
     padding-top: 8px;
@@ -190,11 +202,21 @@ onUnmounted(() => {
   .card {
     // width: 90%;
     // flex-wrap: wrap;
+    // height: 400px;
     margin-block: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    .loading {
+      height: 400px;
+
+      &.el-loading-parent--relative {
+      }
+    }
+
     .container {
       width: 80%;
+      // min-height: 400px;
       column-count: 4;
       column-gap: 20px;
 

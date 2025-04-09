@@ -158,8 +158,6 @@ const emit = defineEmits<{
 
 // 更新评论
 const updateComment = () => {
-  console.log(commentStore.isNone);
-
   commentStore.getCommentList(
     currentOption.value.id,
     currentOption.value.type === "msg" ? 1 : 2

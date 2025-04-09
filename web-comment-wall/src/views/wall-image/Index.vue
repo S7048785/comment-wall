@@ -129,7 +129,7 @@ onUnmounted(() => {
 <style lang="less" scoped>
 .wall-image {
   // Your styles here
-  min-height: 700px;
+  // min-height: 700px;
   padding-top: 52px;
   &.handlerScroll {
     overflow: hidden;

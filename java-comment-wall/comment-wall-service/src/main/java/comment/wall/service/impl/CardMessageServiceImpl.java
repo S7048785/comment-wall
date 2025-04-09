@@ -62,7 +62,6 @@ public class CardMessageServiceImpl extends ServiceImpl<CardMessageMapper, CardM
 		// 手写分页
 		Integer page = cardPageQueryDTO.getPage();
 		Integer pageSize = cardPageQueryDTO.getPageSize();
-		
 		return cardMessageMapper.pageQueryCard((page - 1) * pageSize, pageSize, cardPageQueryDTO.getLabelId(), BaseContext.getCurrentId());
 	}
 	

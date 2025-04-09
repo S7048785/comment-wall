@@ -22,7 +22,7 @@ public class Label {
 
     @TableField("name")
     private String name; // 标签名称
-
-    @TableField("create_time")
-    private LocalDateTime createTime; // 创建时间
+    
+    @TableField("category")
+    private Integer category;
 }

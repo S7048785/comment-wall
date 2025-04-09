@@ -10,6 +10,19 @@ spring:
     url: ${comment.wall.datasource.url}
     username: ${comment.wall.datasource.username}
     password: ${comment.wall.datasource.password}
+  data:
+    redis:
+      host: localhost
+      port: 6379
+#      password: 123456
+      database: 0 # 指定使用Redis的哪个数据库，Redis服务启动后默认有16个数据库，编号分别是从0到15
+      lettuce:
+        pool:
+          max-active: 8 # 最大连接
+          max-idle: 8 # 最大空闲连接
+          min-idle: 0 # 最小空闲连接
+          max-wait: 1000 # 连接等待时间
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: comment.wall.po

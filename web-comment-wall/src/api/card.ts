@@ -15,7 +15,7 @@ export const getCardMsgListAPI = (
     params: {
       page,
       size,
-      label,
+      labelId: label,
     },
   });
 };

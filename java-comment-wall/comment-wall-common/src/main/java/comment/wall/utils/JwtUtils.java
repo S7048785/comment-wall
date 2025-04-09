@@ -18,8 +18,8 @@ public class JwtUtils {
 	// 私钥
 	private final static String SECRET = "a8b3c1d7f9g2h5j8k1l4m7n0p3q6r9s2t5u8v1w4x7y0z3A6B9C2D5E8F1G4H7I";
 	
-	// 过期时间 3小时
-	private static final long TTL = 7200000;
+	// 过期时间 12小时
+	private static final long TTL = 28800000;
 	
 	// 密钥
 	private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());

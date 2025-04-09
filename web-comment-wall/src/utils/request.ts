@@ -2,7 +2,7 @@ import axios from "axios";
 const { VITE_API_URL } = import.meta.env;
 const instance = axios.create({
   baseURL: VITE_API_URL, // 修正URL拼写错误，添加了 '//'
-  timeout: 3000,
+  timeout: 5000,
   headers: {
     // 修正属性名从 'header' 到 'headers'
     "Content-Type": "application/json",
