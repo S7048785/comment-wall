@@ -36,9 +36,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 						"/v3/**",
 						"/webjars/**",
 						"/doc.html"
-						//"/card-message/page",
-						//"/card-image/page",
-						//"/comment/page"
 				);
 	}
 	

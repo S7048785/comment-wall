@@ -1,7 +1,6 @@
 package comment.wall.utils;
 
 
-import comment.wall.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

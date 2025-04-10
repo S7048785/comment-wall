@@ -6,22 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5436ccaf-9814-4130-89bf-dca762337c1c" name="更改" comment="feat(comment-wall): 实现评论区无限下拉和新增留言卡片功能&#10;&#10;- 在后端添加 Redis缓存支持，用于加速标签列表查询&#10;- 前端实现无限下拉加载功能，优化用户体验&#10;- 新增留言卡片组件，支持用户发表评论&#10;- 重构部分代码以支持新功能，包括标签相关接口和数据结构">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/CardPageQueryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/UserLoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-pojo/src/main/java/comment/wall/dto/UserLoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-common/src/main/java/comment/wall/utils/JwtUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/GlobalCorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/api/login.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/CommentModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/LoginInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/LoginInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/components/TopBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/components/TopBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/commentStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/stores/commentStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/stores/userStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/stores/userStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/utils/request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/login/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web-comment-wall/src/views/wall-message/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/comment-wall-service/src/main/java/comment/wall/config/WebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +154,7 @@
       <workItem from="1744161170609" duration="6258000" />
       <workItem from="1744175903286" duration="7223000" />
       <workItem from="1744193860484" duration="4969000" />
+      <workItem from="1744281233251" duration="1897000" />
     </task>
     <task id="LOCAL-00001" summary="feat(comment-wall): 实现评论区无限下拉和新增留言卡片功能&#10;&#10;- 在后端添加 Redis缓存支持，用于加速标签列表查询&#10;- 前端实现无限下拉加载功能，优化用户体验&#10;- 新增留言卡片组件，支持用户发表评论&#10;- 重构部分代码以支持新功能，包括标签相关接口和数据结构">
       <option name="closed" value="true" />
