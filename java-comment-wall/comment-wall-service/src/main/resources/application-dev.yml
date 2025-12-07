@@ -3,11 +3,11 @@ comment:
     datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/comment_wall
-      username: root
-      password: 5211314
+      username: 
+      password: 
     jwt:
       # jwt签名加密时使用的密钥
-      secret-key: a8b3c1d7f9g2h5j8k1l4m7n0p3q6r9s2t5u8v1w4x7y0z3A6B9C2D5E8F1G4H7I
+      secret-key: 
       # jwt过期时间 2小时 (=2 * 60 * 60 * 1000)
       ttl: 7200000
       # 设置前端传递过来的令牌名称
